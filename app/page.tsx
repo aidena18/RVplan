@@ -25,6 +25,28 @@ type FormData = {
   foodOther: string;
   dietary: string[];
   budget: string;
+  submissionDate: string;
+  setupTime: string;
+  secondDate: string;
+  secondStartTime: string;
+  secondEndTime: string;
+  secondLocation: string;
+  setCertified: string;
+  eventPurpose: string;
+  coSponsorClubs: string;
+  coSponsorDepartments: string;
+  secondaryContactName: string;
+  secondaryContactEmail: string;
+  secondaryContactPhone: string;
+  learningCategory: string;
+  skill1: string;
+  skill2: string;
+  skill3: string;
+  supplyCost: string;
+  foodCost: string;
+  newEquipmentCost: string;
+  rentalEquipmentCost: string;
+  laborCost: string;
   notes: string;
 };
 
@@ -51,6 +73,28 @@ const initialData: FormData = {
   foodOther: "",
   dietary: [],
   budget: "",
+  submissionDate: new Date().toISOString().slice(0, 10),
+  setupTime: "",
+  secondDate: "",
+  secondStartTime: "",
+  secondEndTime: "",
+  secondLocation: "",
+  setCertified: "No",
+  eventPurpose: "",
+  coSponsorClubs: "",
+  coSponsorDepartments: "",
+  secondaryContactName: "",
+  secondaryContactEmail: "",
+  secondaryContactPhone: "",
+  learningCategory: "",
+  skill1: "",
+  skill2: "",
+  skill3: "",
+  supplyCost: "",
+  foodCost: "",
+  newEquipmentCost: "",
+  rentalEquipmentCost: "",
+  laborCost: "",
   notes: "",
 };
 
@@ -59,6 +103,7 @@ const steps = [
   ["Event basics", "Date, time & attendance"],
   ["Space & setup", "Find the right room"],
   ["Food & supplies", "Plan what you’ll need"],
+  ["Budget", "Funding & request details"],
   ["Your plan", "Review next steps"],
 ];
 
@@ -89,6 +134,9 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
 
   const pizzaCount = Math.max(1, Math.ceil(data.attendees / 3));
+  const budgetAmount = Number(data.budget.replace(/[^0-9.]/g, "")) || 0;
+  const budgetBreakdownTotal = [data.supplyCost, data.foodCost, data.newEquipmentCost, data.rentalEquipmentCost, data.laborCost].reduce((sum, value) => sum + (Number(value) || 0), 0);
+  const semester = data.date ? `${[0, 1, 2, 3, 4].includes(new Date(`${data.date}T12:00:00`).getMonth()) ? "Spring" : [5, 6, 7].includes(new Date(`${data.date}T12:00:00`).getMonth()) ? "Summer" : "Fall"} ${new Date(`${data.date}T12:00:00`).getFullYear()}` : "To be determined";
 
   const roomRecommendation = useMemo(() => {
     if (data.locationType === "Outdoor space") return "Campus outdoor area + weather backup room";
@@ -121,7 +169,8 @@ export default function Home() {
       return;
     }
     setErrors([]);
-    setStep((current) => Math.min(4, current + 1));
+    if (step === 3 && !data.eventPurpose) setData((current) => ({ ...current, eventPurpose: current.eventDetails }));
+    setStep((current) => Math.min(5, current + 1));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -168,8 +217,8 @@ export default function Home() {
 
       <section className="workspace" aria-label="Event planning form">
         <div className="progressHeader">
-          <div className="progressMeta"><strong>Step {step + 1} of 5</strong><span>{Math.round(((step + 1) / 5) * 100)}% complete</span></div>
-          <div className="progressBar"><span style={{ width: `${((step + 1) / 5) * 100}%` }} /></div>
+          <div className="progressMeta"><strong>Step {step + 1} of 6</strong><span>{Math.round(((step + 1) / 6) * 100)}% complete</span></div>
+          <div className="progressBar"><span style={{ width: `${((step + 1) / 6) * 100}%` }} /></div>
           <ol className="stepList">
             {steps.map(([title], index) => (
               <li key={title} className={index === step ? "active" : index < step ? "done" : ""}>
@@ -235,16 +284,63 @@ export default function Home() {
               <div className="checkGrid">
                 {["Vegetarian", "Vegan", "Gluten-free", "Halal", "Kosher", "Nut allergy"].map((option) => <label key={option}><input type="checkbox" checked={data.dietary.includes(option)} onChange={() => toggleArray("dietary", option)} /><span>✓</span>{option}</label>)}
               </div>
-              <div className="formGrid topGap">{input("budget", "text", "$0.00")}<label className="field"><span>Anything else you need?</span><input value={data.notes} onChange={(e) => update("notes", e.target.value)} placeholder="Decorations, signs, games…" /></label></div>
+              <label className="field full topGap"><span>Anything else you need?</span><input value={data.notes} onChange={(e) => update("notes", e.target.value)} placeholder="Decorations, signs, games…" /></label>
             </>}
 
             {step === 4 && <>
+              <div className="sectionHeading"><span className="sectionIcon">$</span><div><p>Plan the funding</p><h2>Build your budget request.</h2><span>Enter $0 if no funding is needed. A detailed request opens when the estimate is above $0.</span></div></div>
+              <label className="field budgetAmount"><span>Estimated budget</span><span className="moneyInput"><b>$</b><input name="budget" type="number" min="0" step="0.01" value={data.budget} onChange={(e) => update("budget", e.target.value)} placeholder="0.00" /></span></label>
+              {budgetAmount === 0 && <div className="noBudget"><Icon>✓</Icon><div><strong>No budget request needed</strong><p>You can continue to your plan. Change the amount above if your event needs funding.</p></div></div>}
+              {budgetAmount > 0 && <div className="budgetRequest">
+                <div className="budgetBanner"><div><small>ESTIMATED REQUEST</small><strong>${budgetAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div><span>We preloaded everything you already shared.</span></div>
+                <h3 className="budgetSectionTitle">Event information</h3>
+                <div className="preloadedGrid">
+                  <div><small>Sponsoring organization</small><strong>{data.clubName}</strong></div><div><small>Submission date</small><strong>{data.submissionDate}</strong></div>
+                  <div><small>Event name</small><strong>{data.eventName}</strong></div><div><small>Event date</small><strong>{data.date}</strong></div>
+                  <div><small>Event type</small><strong>{data.eventType}</strong></div><div><small>Expected attendance</small><strong>{data.attendees}</strong></div>
+                  <div><small>Event time</small><strong>{data.startTime}–{data.endTime}</strong></div><div><small>Semester & year</small><strong>{semester}</strong></div>
+                  <div><small>Recommended location</small><strong>{roomRecommendation}</strong></div><div><small>Food plan</small><strong>{data.food === "Other food" ? data.foodOther || "Custom order" : data.food}</strong></div>
+                  <div><small>Primary contact</small><strong>{data.studentName} · {data.email}{data.phone ? ` · ${data.phone}` : ""}</strong></div><div><small>Club advisor</small><strong>{data.advisorName}{data.advisorEmail ? ` · ${data.advisorEmail}` : ""}</strong></div>
+                </div>
+                <label className="field full"><span>Short event description and purpose</span><textarea value={data.eventPurpose} onChange={(e) => update("eventPurpose", e.target.value)} placeholder="Describe what will happen, why the event matters, and what students will gain." /></label>
+                <div className="formGrid budgetFields">
+                  <label className="field"><span>Setup time</span><input type="time" value={data.setupTime} onChange={(e) => update("setupTime", e.target.value)} /></label>
+                  <label className="field"><span>SET certified?</span><select value={data.setCertified} onChange={(e) => update("setCertified", e.target.value)}><option>No</option><option>Yes</option><option>Not sure</option></select></label>
+                </div>
+                <h3 className="budgetSectionTitle">Second-choice schedule</h3>
+                <div className="formGrid budgetFields">
+                  <label className="field"><span>Second-choice date</span><input type="date" value={data.secondDate} onChange={(e) => update("secondDate", e.target.value)} /></label>
+                  <label className="field"><span>Second-choice location</span><input value={data.secondLocation} onChange={(e) => update("secondLocation", e.target.value)} placeholder="Room or campus area" /></label>
+                  <label className="field"><span>Second start time</span><input type="time" value={data.secondStartTime} onChange={(e) => update("secondStartTime", e.target.value)} /></label>
+                  <label className="field"><span>Second end time</span><input type="time" value={data.secondEndTime} onChange={(e) => update("secondEndTime", e.target.value)} /></label>
+                </div>
+                <h3 className="budgetSectionTitle">Partners and contacts</h3>
+                <div className="formGrid budgetFields">
+                  <label className="field"><span>Co-sponsoring clubs</span><input value={data.coSponsorClubs} onChange={(e) => update("coSponsorClubs", e.target.value)} placeholder="Leave blank if none" /></label>
+                  <label className="field"><span>Co-sponsoring departments</span><input value={data.coSponsorDepartments} onChange={(e) => update("coSponsorDepartments", e.target.value)} placeholder="Leave blank if none" /></label>
+                  <label className="field"><span>Secondary contact name</span><input value={data.secondaryContactName} onChange={(e) => update("secondaryContactName", e.target.value)} /></label>
+                  <label className="field"><span>Secondary contact email</span><input type="email" value={data.secondaryContactEmail} onChange={(e) => update("secondaryContactEmail", e.target.value)} /></label>
+                  <label className="field"><span>Secondary contact phone</span><input type="tel" value={data.secondaryContactPhone} onChange={(e) => update("secondaryContactPhone", e.target.value)} /></label>
+                  <label className="field"><span>Learning & development category</span><select value={data.learningCategory} onChange={(e) => update("learningCategory", e.target.value)}><option value="">Choose a category</option><option>Academic</option><option>Civic engagement</option><option>Leadership</option><option>Career readiness</option><option>Culture & belonging</option><option>Health & wellness</option></select></label>
+                </div>
+                <h3 className="budgetSectionTitle">Student skills</h3>
+                <div className="skillGrid"><label className="field"><span>Skill 1</span><input value={data.skill1} onChange={(e) => update("skill1", e.target.value)} placeholder="e.g., Academic" /></label><label className="field"><span>Skill 2</span><input value={data.skill2} onChange={(e) => update("skill2", e.target.value)} placeholder="e.g., Diplomacy" /></label><label className="field"><span>Skill 3</span><input value={data.skill3} onChange={(e) => update("skill3", e.target.value)} placeholder="e.g., Public relations" /></label></div>
+                <h3 className="budgetSectionTitle">Budget breakdown</h3>
+                <div className="costGrid">
+                  {[["supplyCost", "Supplies & decorations"], ["foodCost", "Food"], ["newEquipmentCost", "New equipment"], ["rentalEquipmentCost", "Rental equipment"], ["laborCost", "Presenter fee / independent labor"]].map(([key, label]) => <label className="field" key={key}><span>{label}</span><span className="moneyInput"><b>$</b><input type="number" min="0" step="0.01" value={data[key as keyof FormData] as string} onChange={(e) => update(key as keyof FormData, e.target.value as never)} placeholder="0.00" /></span></label>)}
+                </div>
+                <div className={`budgetBalance ${Math.abs(budgetAmount - budgetBreakdownTotal) < .01 ? "balanced" : ""}`}><span>Breakdown total <strong>${budgetBreakdownTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></span><span>{Math.abs(budgetAmount - budgetBreakdownTotal) < .01 ? "✓ Matches your estimate" : `$${Math.abs(budgetAmount - budgetBreakdownTotal).toFixed(2)} ${budgetBreakdownTotal < budgetAmount ? "left to assign" : "over estimate"}`}</span></div>
+              </div>}
+            </>}
+
+            {step === 5 && <>
               <div className="sectionHeading"><span className="sectionIcon">✓</span><div><p>Your planning roadmap</p><h2>{submitted ? "Your request is ready." : "Review your event plan."}</h2><span>{submitted ? "Bring this plan to Student Life to start the official approval process." : "Check the details, then create your planning checklist."}</span></div></div>
               <div className="summaryHero"><div><small>{data.eventType.toUpperCase()}</small><h3>{data.eventName || "Your club event"}</h3><p>{data.clubName} · {data.date ? new Date(`${data.date}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "Date to be confirmed"} · {data.attendees} guests · {data.rsvpPlan}{data.guestSpeaker ? " · Guest speaker" : ""}</p></div><button onClick={() => setStep(1)}>Edit details</button></div>
               <div className="summaryGrid">
                 <div><span className="summaryIcon">⌂</span><small>SPACE</small><strong>{roomRecommendation}</strong><p>{data.roomNeeds.length ? data.roomNeeds.join(" · ") : "Standard room setup"}</p></div>
                 <div><span className="summaryIcon">◒</span><small>FOOD</small><strong>{data.food === "Pizza" ? `${pizzaCount} large pizzas` : data.food === "Snacks & drinks" ? "Snacks & drinks" : data.food === "Order from the cafeteria" ? "Cafeteria food order" : data.food === "Other food" ? data.foodOther || "Custom food order" : "No food requested"}</strong><p>{data.dietary.length ? `Plan for: ${data.dietary.join(", ")}` : "No dietary needs listed"}</p></div>
               </div>
+              <div className="budgetSummary"><span>$</span><div><small>BUDGET</small><strong>{budgetAmount > 0 ? `$${budgetAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} estimated request` : "No funding requested"}</strong><p>{budgetAmount > 0 ? "Review the completed budget details with Student Life before making purchases." : "No budget request form is needed based on your estimate."}</p></div><button onClick={() => setStep(4)}>Edit budget</button></div>
               <div className="nextSteps">
                 <div className="nextTitle"><span>YOUR NEXT STEPS</span><strong>Start early—room and food approvals take time.</strong></div>
                 {[
@@ -260,7 +356,7 @@ export default function Home() {
             <div className="formFooter">
               <button className="backButton" onClick={() => setStep((current) => Math.max(0, current - 1))} disabled={step === 0}>← Back</button>
               <span>Your information stays on this device.</span>
-              {step < 4 ? <button className="primaryButton" onClick={next}>Continue to {steps[step + 1][0].toLowerCase()} <span>→</span></button> : <div className="finalActions"><button className="printButton" onClick={() => window.print()}>Print plan</button><button className="primaryButton" onClick={() => setSubmitted(true)}>{submitted ? "Plan created ✓" : "Create my plan →"}</button></div>}
+              {step < 5 ? <button className="primaryButton" onClick={next}>Continue to {steps[step + 1][0].toLowerCase()} <span>→</span></button> : <div className="finalActions"><button className="printButton" onClick={() => window.print()}>Print plan</button><button className="primaryButton" onClick={() => setSubmitted(true)}>{submitted ? "Plan created ✓" : "Create my plan →"}</button></div>}
             </div>
           </section>
 

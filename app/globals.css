@@ -50,7 +50,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .progressMeta span { color: var(--muted); }
 .progressBar { height: 5px; border-radius: 8px; background: #edf0ed; overflow: hidden; }
 .progressBar span { display: block; height: 100%; background: var(--lime); transition: width .35s ease; }
-.stepList { list-style: none; margin: 17px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); }
+.stepList { list-style: none; margin: 17px 0 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); }
 .stepList button { border: 0; padding: 0; background: transparent; display: flex; align-items: center; gap: 8px; font-size: 12px; color: #8a9590; font-weight: 700; }
 .stepList button:disabled { cursor: default; }
 .stepList button > span { width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid #cdd5d1; border-radius: 50%; font-size: 11px; }
@@ -109,6 +109,38 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .foodEstimate { margin-top: 18px; background: var(--forest); color: white; border-radius: 10px; padding: 20px 22px; display: flex; justify-content: space-between; align-items: center; }
 .otherFoodField { margin-top: 18px; }
 .foodGuidance { margin-top: 18px; }
+.budgetAmount { max-width: 360px; }
+.moneyInput { height: 48px; border: 1px solid #cfd8d3; border-radius: 8px; background: #fbfcfb; display: flex; align-items: center; overflow: hidden; }
+.moneyInput > b { height: 100%; width: 42px; flex: 0 0 auto; background: #edf3e3; display: grid; place-items: center; color: var(--forest); }
+.moneyInput input { border: 0; box-shadow: none !important; }
+.noBudget { margin-top: 22px; background: #f1f7e0; border: 1px solid #d4e2aa; border-radius: 10px; padding: 18px; display: flex; gap: 13px; }
+.noBudget .icon { width: 30px; height: 30px; flex: 0 0 auto; border-radius: 50%; background: var(--forest); color: white; display: grid; place-items: center; }
+.noBudget strong { font-size: 13px; }
+.noBudget p { margin: 4px 0 0; color: var(--muted); font-size: 11px; }
+.budgetRequest { margin-top: 24px; display: grid; gap: 20px; }
+.budgetBanner { background: var(--forest); color: white; border-radius: 10px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; }
+.budgetBanner > div { display: flex; flex-direction: column; }
+.budgetBanner small { color: #b9d85d; font-size: 9px; letter-spacing: .1em; font-weight: 850; }
+.budgetBanner strong { font-size: 26px; }
+.budgetBanner > span { color: #ccdad4; font-size: 11px; }
+.budgetSectionTitle { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #5d8122; margin: 4px 0 -8px; border-bottom: 1px solid var(--line); padding-bottom: 9px; }
+.preloadedGrid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+.preloadedGrid > div { padding: 11px 13px; display: flex; flex-direction: column; gap: 3px; border-bottom: 1px solid #e8ece9; }
+.preloadedGrid > div:nth-child(odd) { border-right: 1px solid #e8ece9; }
+.preloadedGrid small { color: var(--muted); font-size: 9px; }
+.preloadedGrid strong { font-size: 11px; font-weight: 700; }
+.budgetFields { gap: 14px 18px; }
+.skillGrid, .costGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.costGrid { grid-template-columns: repeat(2, 1fr); }
+.budgetBalance { background: #f6f7f6; border: 1px solid var(--line); border-radius: 8px; padding: 13px 15px; display: flex; justify-content: space-between; gap: 10px; font-size: 11px; color: #7b5c23; }
+.budgetBalance.balanced { background: #eff7d9; border-color: #cadd9b; color: #3f6521; }
+.budgetSummary { margin-top: 16px; border: 1px solid var(--line); border-radius: 9px; padding: 14px 16px; display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; }
+.budgetSummary > span { width: 34px; height: 34px; border-radius: 7px; background: #edf5d7; display: grid; place-items: center; font-weight: 850; }
+.budgetSummary div { display: flex; flex-direction: column; }
+.budgetSummary small { color: #5d8122; font-size: 9px; font-weight: 850; letter-spacing: .1em; }
+.budgetSummary strong { font-size: 12px; }
+.budgetSummary p { margin: 2px 0 0; color: var(--muted); font-size: 10px; }
+.budgetSummary button { border: 1px solid #c9d2ce; background: white; color: var(--forest); border-radius: 7px; padding: 8px 11px; font-size: 10px; font-weight: 750; }
 .foodEstimate > div:first-child { display: flex; flex-direction: column; gap: 4px; }
 .foodEstimate small { color: #c8d8d1; }
 .foodEstimate strong { color: #c3e266; font-size: 25px; }
@@ -223,6 +255,9 @@ footer a { color: var(--forest); font-size: 12px; font-weight: 750; }
   .formCard { padding: 27px 18px; }
   .sectionHeading h2 { font-size: 25px; }
   .formGrid, .choiceGrid, .choiceGrid.three, .checkGrid, .summaryGrid { grid-template-columns: 1fr; }
+  .preloadedGrid, .skillGrid, .costGrid { grid-template-columns: 1fr; }
+  .preloadedGrid > div:nth-child(odd) { border-right: 0; }
+  .budgetBanner { align-items: flex-start; gap: 8px; flex-direction: column; }
   .summaryGrid > div + div { border-left: 0; border-top: 1px solid var(--line); }
   .formFooter { flex-wrap: wrap; }
   .formFooter > span { display: none; }
