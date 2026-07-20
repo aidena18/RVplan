@@ -11,6 +11,8 @@ type FormData = {
   advisorEmail: string;
   eventName: string;
   eventType: string;
+  rsvpPlan: string;
+  eventDetails: string;
   date: string;
   startTime: string;
   endTime: string;
@@ -32,7 +34,9 @@ const initialData: FormData = {
   advisorName: "",
   advisorEmail: "",
   eventName: "",
-  eventType: "Club meeting",
+  eventType: "Regular club meeting",
+  rsvpPlan: "Not sure yet",
+  eventDetails: "",
   date: "",
   startTime: "",
   endTime: "",
@@ -193,11 +197,13 @@ export default function Home() {
               <div className="sectionHeading"><span className="sectionIcon">⌁</span><div><p>Shape the idea</p><h2>Tell us about your event.</h2><span>An estimate is fine—you can confirm details with staff later.</span></div></div>
               <div className="formGrid">
                 {input("eventName", "text", "e.g., Game Night & Pizza")}
-                <label className="field"><span>Event type</span><select value={data.eventType} onChange={(e) => update("eventType", e.target.value)}><option>Club meeting</option><option>Social event</option><option>Workshop or speaker</option><option>Fundraiser</option><option>Performance or showcase</option><option>Community service</option></select></label>
+                <label className="field"><span>Event type</span><select value={data.eventType} onChange={(e) => update("eventType", e.target.value)}><option>Regular club meeting</option><option>Formal showcase or performance</option><option>Bake sale or fundraiser</option><option>Field trip or off-campus event</option><option>Workshop or guest speaker</option><option>Holiday or cultural celebration</option><option>Social or community-building event</option><option>Community service event</option><option>Other</option></select></label>
                 {input("date", "date")}
                 {input("attendees", "number")}
                 {input("startTime", "time")}
                 {input("endTime", "time")}
+                <label className="field"><span>Do you plan to collect RSVPs?</span><select value={data.rsvpPlan} onChange={(e) => update("rsvpPlan", e.target.value)}><option>Yes, we’ll send an RSVP</option><option>No, this will be open attendance</option><option>Not sure yet</option></select><em>For larger events, we recommend collecting RSVPs so you can plan the room, food, and supplies.</em></label>
+                <label className="field full"><span>Extra event details</span><textarea value={data.eventDetails} onChange={(e) => update("eventDetails", e.target.value)} placeholder="Share the theme, planned activities, special guests, travel plans, or anything else Student Life should know…" /></label>
               </div>
             </>}
 
@@ -232,7 +238,7 @@ export default function Home() {
 
             {step === 4 && <>
               <div className="sectionHeading"><span className="sectionIcon">✓</span><div><p>Your planning roadmap</p><h2>{submitted ? "Your request is ready." : "Review your event plan."}</h2><span>{submitted ? "Bring this plan to Student Life to start the official approval process." : "Check the details, then create your planning checklist."}</span></div></div>
-              <div className="summaryHero"><div><small>EVENT</small><h3>{data.eventName || "Your club event"}</h3><p>{data.clubName} · {data.date ? new Date(`${data.date}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "Date to be confirmed"} · {data.attendees} guests</p></div><button onClick={() => setStep(1)}>Edit details</button></div>
+              <div className="summaryHero"><div><small>{data.eventType.toUpperCase()}</small><h3>{data.eventName || "Your club event"}</h3><p>{data.clubName} · {data.date ? new Date(`${data.date}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "Date to be confirmed"} · {data.attendees} guests · {data.rsvpPlan}</p></div><button onClick={() => setStep(1)}>Edit details</button></div>
               <div className="summaryGrid">
                 <div><span className="summaryIcon">⌂</span><small>SPACE</small><strong>{roomRecommendation}</strong><p>{data.roomNeeds.length ? data.roomNeeds.join(" · ") : "Standard room setup"}</p></div>
                 <div><span className="summaryIcon">◒</span><small>FOOD</small><strong>{data.food === "Pizza" ? `${pizzaCount} large pizzas + ${drinkCount} drinks` : data.food === "Snacks & drinks" ? `${snackCount} snacks + ${drinkCount} drinks` : "No food requested"}</strong><p>{data.dietary.length ? `Plan for: ${data.dietary.join(", ")}` : "No dietary needs listed"}</p></div>
