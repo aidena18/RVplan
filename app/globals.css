@@ -117,24 +117,23 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .noBudget .icon { width: 30px; height: 30px; flex: 0 0 auto; border-radius: 50%; background: var(--forest); color: white; display: grid; place-items: center; }
 .noBudget strong { font-size: 13px; }
 .noBudget p { margin: 4px 0 0; color: var(--muted); font-size: 11px; }
-.budgetRequest { margin-top: 24px; display: grid; gap: 16px; border: 2px solid #303733; border-radius: 6px; padding: 16px; background: #fffef4; box-shadow: 0 8px 24px rgba(29,48,39,.08); }
-.budgetFormHeader { text-align: center; border: 1px solid #303733; background: white; padding: 10px; display: flex; flex-direction: column; }
-.budgetFormHeader strong { font-family: Georgia, serif; font-size: 16px; }
-.budgetFormHeader span { color: var(--muted); font-size: 10px; margin-top: 2px; text-transform: uppercase; letter-spacing: .12em; }
+.budgetRequest { margin-top: 24px; display: grid; gap: 20px; }
+.budgetFormHeader { text-align: left; border: 1px solid var(--line); border-left: 4px solid var(--lime); border-radius: 9px; background: white; padding: 16px 18px; display: flex; flex-direction: column; }
+.budgetFormHeader strong { color: var(--forest); font-size: 18px; letter-spacing: -.02em; }
+.budgetFormHeader span { color: #5d8122; font-size: 9px; font-weight: 850; text-transform: uppercase; letter-spacing: .12em; }
+.budgetFormHeader p { color: var(--muted); font-size: 10px; margin: 3px 0 0; }
 .budgetBanner { background: var(--forest); color: white; border-radius: 10px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; }
 .budgetBanner > div { display: flex; flex-direction: column; }
 .budgetBanner small { color: #b9d85d; font-size: 9px; letter-spacing: .1em; font-weight: 850; }
 .budgetBanner strong { font-size: 26px; }
 .budgetBanner > span { color: #ccdad4; font-size: 11px; }
-.budgetSectionTitle { font-family: Georgia, serif; font-size: 12px; text-transform: none; letter-spacing: 0; color: #26362f; margin: 4px 0 -8px; border: 1px solid #303733; background: #d8dbd9; padding: 7px 9px; }
-.preloadedGrid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #303733; overflow: hidden; }
-.preloadedGrid > div { min-height: 42px; display: grid; grid-template-columns: 42% 58%; border-bottom: 1px solid #303733; background: #fffecf; }
-.preloadedGrid > div:nth-child(odd) { border-right: 1px solid #303733; }
-.preloadedGrid small { color: #36413c; font-family: Georgia, serif; font-style: italic; font-size: 9px; background: #d8dbd9; padding: 8px; display: flex; align-items: center; }
-.preloadedGrid strong { font-size: 10px; font-weight: 700; padding: 8px; display: flex; align-items: center; overflow-wrap: anywhere; }
-.budgetRequest .field input, .budgetRequest .field select, .budgetRequest .field textarea { background: #fffed2; border-color: #8d948f; }
-.budgetRequest .costGrid .moneyInput { background: #dbf2d6; border-color: #76857c; }
-.budgetRequest .costGrid input { background: #dbf2d6; }
+.budgetSectionTitle { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #5d8122; margin: 4px 0 -8px; border-bottom: 1px solid var(--line); padding-bottom: 9px; }
+.sectionExplainer { color: var(--muted); font-size: 11px; line-height: 1.5; margin: -5px 0 -6px; }
+.preloadedGrid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+.preloadedGrid > div { padding: 11px 13px; display: flex; flex-direction: column; gap: 3px; border-bottom: 1px solid #e8ece9; background: white; }
+.preloadedGrid > div:nth-child(odd) { border-right: 1px solid #e8ece9; }
+.preloadedGrid small { color: var(--muted); font-size: 9px; }
+.preloadedGrid strong { font-size: 11px; font-weight: 700; overflow-wrap: anywhere; }
 .budgetFields { gap: 14px 18px; }
 .skillGrid, .costGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .costGrid { grid-template-columns: repeat(2, 1fr); }
@@ -263,7 +262,6 @@ footer a { color: var(--forest); font-size: 12px; font-weight: 750; }
   .formGrid, .choiceGrid, .choiceGrid.three, .checkGrid, .summaryGrid { grid-template-columns: 1fr; }
   .preloadedGrid, .skillGrid, .costGrid { grid-template-columns: 1fr; }
   .preloadedGrid > div:nth-child(odd) { border-right: 0; }
-  .preloadedGrid > div { grid-template-columns: 40% 60%; }
   .budgetBanner { align-items: flex-start; gap: 8px; flex-direction: column; }
   .summaryGrid > div + div { border-left: 0; border-top: 1px solid var(--line); }
   .formFooter { flex-wrap: wrap; }
