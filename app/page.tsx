@@ -202,7 +202,7 @@ export default function Home() {
         <nav className="topbar" aria-label="Main navigation">
           <a className="brand" href="https://www.raritanval.edu/" target="_blank" rel="noreferrer">
             <span className="logoBox"><img src="/rvcc-logo.png" alt="RVCC lion logo" /></span>
-            <span><strong>Raritan Valley</strong><small>Student Life · Event Planner</small></span>
+            <span><strong>RV Plan</strong><small>Raritan Valley · Student Life</small></span>
           </a>
           <div className="navActions">
             <a href="https://www.raritanval.edu/student-experience/student-involvement/" target="_blank" rel="noreferrer">Explore student life</a>
@@ -210,7 +210,7 @@ export default function Home() {
           </div>
         </nav>
         <div className="heroCopy">
-          <p className="eyebrow">Student club event request</p>
+          <p className="eyebrow">RV Plan · Student club event request</p>
           <h1>Plan your club event<br />with confidence.</h1>
           <p>Answer a few questions and leave with room guidance, food estimates, and a personalized checklist for making your event happen.</p>
         </div>
@@ -294,7 +294,7 @@ export default function Home() {
               <label className="field budgetAmount"><span>Estimated budget</span><span className="moneyInput"><b>$</b><input name="budget" type="number" min="0" step="0.01" value={data.budget} onChange={(e) => update("budget", e.target.value)} placeholder="0.00" /></span></label>
               {budgetAmount === 0 && <div className="noBudget"><Icon>✓</Icon><div><strong>No budget request needed</strong><p>You can continue to your plan. Change the amount above if your event needs funding.</p></div></div>}
               {budgetAmount > 0 && <div className="budgetRequest">
-                <div className="budgetFormHeader"><span>RVCC Student Life</span><strong>Club / Organization Budget Proposal</strong><p>Events & Projects</p></div>
+                <div className="budgetFormHeader"><span>RV Plan · RVCC Student Life</span><strong>Club / Organization Budget Proposal</strong><p>Events & Projects</p></div>
                 <div className="budgetBanner"><div><small>ESTIMATED REQUEST</small><strong>${budgetAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div><span>We preloaded everything you already shared.</span></div>
                 <h3 className="budgetSectionTitle">Event information</h3>
                 <div className="preloadedGrid">
@@ -389,7 +389,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer><div className="footerBrand"><img src="/rvcc-logo.png" alt="" /><span><strong>Raritan Valley Community College</strong><small>Student Life · Bateman Student Center, 1st Floor</small></span></div><div><a href="mailto:studentlife@raritanval.edu">studentlife@raritanval.edu</a><a href="tel:+19082188873">908-218-8873</a></div></footer>
+      <footer><div className="footerBrand"><img src="/rvcc-logo.png" alt="" /><span><strong>RV Plan</strong><small>Raritan Valley Community College · Student Life</small></span></div><div><a href="mailto:studentlife@raritanval.edu">studentlife@raritanval.edu</a><a href="tel:+19082188873">908-218-8873</a></div></footer>
 
       {helpOpen && <div className="modalBackdrop" role="presentation" onMouseDown={() => setHelpOpen(false)}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="help-title" onMouseDown={(e) => e.stopPropagation()}><button className="modalClose" onClick={() => setHelpOpen(false)} aria-label="Close help dialog">×</button><span className="helpIcon">?</span><p className="eyebrow dark">Real people, real help</p><h2 id="help-title">Talk to Student Life.</h2><p>Staff can help with rooms, approvals, funding, food, accessibility, promotion, and any question that comes up.</p><div className="contactOptions"><a href="mailto:studentlife@raritanval.edu?subject=Club%20event%20planning%20help"><Icon>✉</Icon><span><strong>Email Student Life</strong>studentlife@raritanval.edu</span><b>→</b></a><a href="tel:+19082188873"><Icon>☎</Icon><span><strong>Call the office</strong>908-218-8873</span><b>→</b></a><div><Icon>⌂</Icon><span><strong>Visit in person</strong>Bateman Student Center, 1st Floor</span></div></div><small>Office hours and staff availability may vary. Contact the office before visiting.</small></section></div>}
     </main>
