@@ -89,8 +89,6 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
 
   const pizzaCount = Math.max(1, Math.ceil(data.attendees / 3));
-  const drinkCount = Math.ceil(data.attendees * 1.15);
-  const snackCount = Math.ceil(data.attendees * 1.1);
 
   const roomRecommendation = useMemo(() => {
     if (data.locationType === "Outdoor space") return "Campus outdoor area + weather backup room";
@@ -231,10 +229,8 @@ export default function Home() {
                 {["No food needed", "Pizza", "Snacks & drinks", "Order from the cafeteria", "Other food"].map((option) => <label className={`choiceCard ${data.food === option ? "selected" : ""}`} key={option}><input type="radio" name="food" checked={data.food === option} onChange={() => update("food", option)} /><span className="choiceMark">{option === "Pizza" ? "◔" : option.includes("Snacks") ? "▣" : option.includes("cafeteria") ? "▤" : option === "Other food" ? "+" : "—"}</span><strong>{option}</strong></label>)}
               </div>
               {data.food === "Other food" && <label className="field full otherFoodField"><span>Restaurant or food order</span><input value={data.foodOther} onChange={(e) => update("foodOther", e.target.value)} placeholder="e.g., sandwiches from a local restaurant" /></label>}
-              {data.food !== "No food needed" && <div className="foodEstimate">
-                <div><small>For {data.attendees} guests, plan for</small><strong>{data.food === "Pizza" ? `${pizzaCount} large pizzas` : data.food === "Snacks & drinks" ? `${snackCount} snack servings` : data.food === "Order from the cafeteria" ? "A cafeteria food order" : data.foodOther || "A custom food order"}</strong><span>{data.food === "Pizza" ? "Assumes 8 slices per pizza and about 2.5 slices per guest." : data.food === "Snacks & drinks" ? "Includes a small buffer for extra guests." : data.food === "Order from the cafeteria" ? "Confirm the menu, quantities, lead time, and ordering process with Student Life and the cafeteria." : "Confirm restaurant approval, quantities, delivery, payment, and dietary needs with Student Life."}</span></div>
-                <div className="estimateBadge"><strong>{drinkCount}</strong><span>drinks</span></div>
-              </div>}
+              {data.food === "Pizza" && <div className="foodEstimate"><div><small>For {data.attendees} guests, plan for about</small><strong>{pizzaCount} large pizzas</strong><span>Assumes 8 slices per pizza and about 2.5 slices per guest.</span></div></div>}
+              {data.food !== "No food needed" && data.food !== "Pizza" && <div className="recommendation foodGuidance"><Icon>i</Icon><div><small>FOOD ORDER GUIDANCE</small><strong>{data.food === "Snacks & drinks" ? "Plan snacks and drinks with Student Life" : data.food === "Order from the cafeteria" ? "Confirm your cafeteria order" : "Confirm your custom food order"}</strong><p>{data.food === "Order from the cafeteria" ? "Ask about the menu, lead time, payment, and ordering process." : data.food === "Other food" ? "Ask about restaurant approval, delivery, payment, and dietary needs." : "Confirm approved items, payment, delivery, and dietary needs before ordering."}</p></div></div>}
               <h3 className="miniHeading">Dietary needs to plan for</h3>
               <div className="checkGrid">
                 {["Vegetarian", "Vegan", "Gluten-free", "Halal", "Kosher", "Nut allergy"].map((option) => <label key={option}><input type="checkbox" checked={data.dietary.includes(option)} onChange={() => toggleArray("dietary", option)} /><span>✓</span>{option}</label>)}
@@ -247,7 +243,7 @@ export default function Home() {
               <div className="summaryHero"><div><small>{data.eventType.toUpperCase()}</small><h3>{data.eventName || "Your club event"}</h3><p>{data.clubName} · {data.date ? new Date(`${data.date}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "Date to be confirmed"} · {data.attendees} guests · {data.rsvpPlan}{data.guestSpeaker ? " · Guest speaker" : ""}</p></div><button onClick={() => setStep(1)}>Edit details</button></div>
               <div className="summaryGrid">
                 <div><span className="summaryIcon">⌂</span><small>SPACE</small><strong>{roomRecommendation}</strong><p>{data.roomNeeds.length ? data.roomNeeds.join(" · ") : "Standard room setup"}</p></div>
-                <div><span className="summaryIcon">◒</span><small>FOOD</small><strong>{data.food === "Pizza" ? `${pizzaCount} large pizzas + ${drinkCount} drinks` : data.food === "Snacks & drinks" ? `${snackCount} snacks + ${drinkCount} drinks` : data.food === "Order from the cafeteria" ? "Cafeteria food order" : data.food === "Other food" ? data.foodOther || "Custom food order" : "No food requested"}</strong><p>{data.dietary.length ? `Plan for: ${data.dietary.join(", ")}` : "No dietary needs listed"}</p></div>
+                <div><span className="summaryIcon">◒</span><small>FOOD</small><strong>{data.food === "Pizza" ? `${pizzaCount} large pizzas` : data.food === "Snacks & drinks" ? "Snacks & drinks" : data.food === "Order from the cafeteria" ? "Cafeteria food order" : data.food === "Other food" ? data.foodOther || "Custom food order" : "No food requested"}</strong><p>{data.dietary.length ? `Plan for: ${data.dietary.join(", ")}` : "No dietary needs listed"}</p></div>
               </div>
               <div className="nextSteps">
                 <div className="nextTitle"><span>YOUR NEXT STEPS</span><strong>Start early—room and food approvals take time.</strong></div>
