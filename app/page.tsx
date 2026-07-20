@@ -130,6 +130,7 @@ function Icon({ children }: { children: React.ReactNode }) {
 
 export default function Home() {
   const [view, setView] = useState<"student" | "staff">("student");
+  const [staffView, setStaffView] = useState<"all" | "fran" | "kiswah" | "alaysha">("all");
   const [step, setStep] = useState(0);
   const [data, setData] = useState<FormData>(initialData);
   const [errors, setErrors] = useState<string[]>([]);
@@ -393,6 +394,15 @@ export default function Home() {
           <div><p className="eyebrow dark">STAFF DEMO</p><h2>Event request dashboard</h2><span>See what students need and keep every request moving.</span></div>
           <button className="primaryButton" onClick={() => setView("student")}>+ Open student planner</button>
         </div>
+        <div className="staffFolders" aria-label="Staff portfolios">
+          {[
+            { id: "all", name: "All staff", role: "Shared team view", count: 8 },
+            { id: "fran", name: "Fran Boshell", role: "Director of Student Life", count: 3 },
+            { id: "kiswah", name: "Kiswah Khan", role: "Coordinator of Student Engagement", count: 3 },
+            { id: "alaysha", name: "Alaysha Walker", role: "Assistant Director of Student Life", count: 2 },
+          ].map((member) => <button key={member.id} className={`staffFolder ${member.id} ${staffView === member.id ? "active" : ""}`} onClick={() => setStaffView(member.id as typeof staffView)}><span className="folderTab" /><span><strong>{member.name}</strong><small>{member.role}</small></span><b>{member.count}</b></button>)}
+        </div>
+        <div className="sharedViewNote"><span>👁</span><p><strong>{staffView === "all" ? "Shared team view" : `Viewing ${staffView === "fran" ? "Fran’s" : staffView === "kiswah" ? "Kiswah’s" : "Alaysha’s"} portfolio`}</strong> Everyone can open every request, see progress, and help another staff member. Assigned clubs appear in that staff member’s personal queue.</p></div>
         <div className="staffStats">
           <article><span>OPEN REQUESTS</span><strong>8</strong><small>3 need action this week</small></article>
           <article><span>AWAITING BUDGET</span><strong>3</strong><small>$2,340 requested</small></article>
@@ -405,15 +415,19 @@ export default function Home() {
             <div className="requestTable" role="table" aria-label="Student event requests">
               <div className="requestRow tableHead" role="row"><span>Event</span><span>Date</span><span>Needs</span><span>Status</span></div>
               {[
-                { event: data.eventName || "International Game Night", club: data.clubName || "Global Connections Club", date: data.date || "Oct 24", needs: budgetAmount > 0 ? `Room · $${budgetAmount.toLocaleString()}` : "Room · Food", status: submitted ? "New submission" : "Needs review", tone: "review" },
-                { event: "Fall Cultural Showcase", club: "Asian Student Association", date: "Nov 7", needs: "Stage · Catering", status: "Room pending", tone: "pending" },
-                { event: "Film Club Movie Night", club: "Film Club", date: "Nov 14", needs: "Auditorium · AV", status: "Approved", tone: "approved" },
-                { event: "Holiday Bake Sale", club: "Business Club", date: "Dec 3", needs: "Tables · Budget", status: "Budget review", tone: "review" },
-              ].map((request) => <button className="requestRow" role="row" key={request.event}><span><strong>{request.event}</strong><small>{request.club}</small></span><span>{request.date}</span><span>{request.needs}</span><span><b className={`status ${request.tone}`}>{request.status}</b><i>→</i></span></button>)}
+                { event: data.eventName || "International Game Night", club: data.clubName || "Global Connections Club", owner: "fran", ownerName: "Fran", date: data.date || "Oct 24", needs: budgetAmount > 0 ? `Room · $${budgetAmount.toLocaleString()}` : "Room · Food", status: submitted ? "New submission" : "Needs review", tone: "review" },
+                { event: "Leadership Roundtable", club: "Student Government", owner: "fran", ownerName: "Fran", date: "Oct 30", needs: "Conference room", status: "Needs review", tone: "review" },
+                { event: "Fall Cultural Showcase", club: "Asian Student Association", owner: "kiswah", ownerName: "Kiswah", date: "Nov 7", needs: "Stage · Catering", status: "Room pending", tone: "pending" },
+                { event: "Engineering Design Expo", club: "Engineering Club", owner: "kiswah", ownerName: "Kiswah", date: "Nov 12", needs: "Tables · Power", status: "Needs review", tone: "review" },
+                { event: "Film Club Movie Night", club: "Film Club", owner: "alaysha", ownerName: "Alaysha", date: "Nov 14", needs: "Auditorium · AV", status: "Approved", tone: "approved" },
+                { event: "Open Mic Night", club: "Music Club", owner: "alaysha", ownerName: "Alaysha", date: "Nov 20", needs: "Stage · Mics", status: "Room pending", tone: "pending" },
+                { event: "Holiday Bake Sale", club: "Business Club", owner: "fran", ownerName: "Fran", date: "Dec 3", needs: "Tables · Budget", status: "Budget review", tone: "review" },
+                { event: "Wellness Workshop", club: "Psychology Club", owner: "kiswah", ownerName: "Kiswah", date: "Dec 5", needs: "Classroom · Food", status: "Approved", tone: "approved" },
+              ].filter((request) => staffView === "all" || request.owner === staffView).map((request) => <button className={`requestRow owner-${request.owner}`} role="row" key={request.event}><span><strong>{request.event}</strong><small>{request.club}<em className={`ownerTag ${request.owner}`}>{request.ownerName}</em></small></span><span>{request.date}</span><span>{request.needs}</span><span><b className={`status ${request.tone}`}>{request.status}</b><i>→</i></span></button>)}
             </div>
           </section>
           <aside className="staffSidebar">
-            <section><p className="eyebrow dark">TODAY'S PRIORITIES</p><h3>Keep these moving</h3><ul><li><b>1</b><span><strong>Review budget requests</strong><small>3 proposals are waiting</small></span></li><li><b>2</b><span><strong>Confirm event rooms</strong><small>4 requests need a location</small></span></li><li><b>3</b><span><strong>Send student updates</strong><small>2 confirmations are ready</small></span></li></ul></section>
+            <section className={`personalTodos ${staffView}`}><p className="eyebrow dark">{staffView === "all" ? "TEAM PRIORITIES" : `${staffView.toUpperCase()}’S TO-DO LIST`}</p><h3>{staffView === "all" ? "Keep these moving" : "Assigned club follow-up"}</h3><ul>{(staffView === "fran" ? [["Review SGA budget", "Leadership Roundtable"], ["Confirm tables", "Business Club bake sale"], ["Check new submission", data.clubName || "Global Connections Club"]] : staffView === "kiswah" ? [["Confirm showcase room", "Asian Student Association"], ["Review power needs", "Engineering Club"], ["Send approval", "Psychology Club"]] : staffView === "alaysha" ? [["Confirm auditorium AV", "Film Club"], ["Reserve microphones", "Music Club"], ["Send student updates", "2 confirmations ready"]] : [["Review budget requests", "3 proposals are waiting"], ["Confirm event rooms", "4 requests need a location"], ["Send student updates", "2 confirmations are ready"]]).map(([task, detail], index) => <li key={task}><b>{index + 1}</b><span><strong>{task}</strong><small>{detail}</small></span></li>)}</ul></section>
             <section className="needsSnapshot"><p className="eyebrow dark">STUDENT NEEDS</p><h3>At a glance</h3><div><span>Projector / screen <b>6</b></span><span>Food support <b>5</b></span><span>Budget funding <b>3</b></span><span>Accessibility notes <b>2</b></span></div></section>
           </aside>
         </div>
