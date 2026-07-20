@@ -80,7 +80,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .guestSpeakerControl { height: 48px; border: 1px solid #cfd8d3; border-radius: 8px; background: #fbfcfb; padding: 0 13px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: border .2s, box-shadow .2s; }
 .guestSpeakerControl:hover { border-color: #8aaa49; }
 .guestSpeakerControl.selected { background: #f2f8df; border-color: #8eb338; box-shadow: 0 0 0 3px rgba(154,196,60,.12); }
-.guestSpeakerControl input { position: absolute; opacity: 0; }
+.guestSpeakerControl input { position: absolute; opacity: 0; width: 1px; height: 1px; padding: 0; pointer-events: none; }
 .guestCheck { width: 22px; height: 22px; flex: 0 0 auto; border: 1px solid #b8c5bf; border-radius: 5px; color: transparent; display: grid; place-items: center; font-size: 11px; }
 .guestSpeakerControl.selected .guestCheck { background: var(--forest); border-color: var(--forest); color: white; }
 .guestSpeakerControl strong { font-size: 12px; }
