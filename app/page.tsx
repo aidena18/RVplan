@@ -200,7 +200,7 @@ export default function Home() {
               <div className="formGrid">
                 {input("eventName", "text", "e.g., Game Night & Pizza")}
                 <label className="field"><span>Event type</span><select value={data.eventType} onChange={(e) => update("eventType", e.target.value)}><option>Regular club meeting</option><option>Formal showcase</option><option>Performance</option><option>Bake sale</option><option>Fundraiser</option><option>Field trip</option><option>Off-campus event</option><option>Workshop</option><option>Holiday celebration</option><option>Cultural celebration</option><option>Movie night</option><option>Other</option></select></label>
-                <label className={`guestSpeakerChoice full ${data.guestSpeaker ? "selected" : ""}`}><input type="checkbox" checked={data.guestSpeaker} onChange={(e) => update("guestSpeaker", e.target.checked)} /><span className="guestCheck">✓</span><span><strong>Guest speaker</strong><small>Check this box if someone outside your club will speak or present.</small></span></label>
+                <label className="field guestSpeakerField"><span>Guest speaker</span><span className={`guestSpeakerControl ${data.guestSpeaker ? "selected" : ""}`}><input type="checkbox" checked={data.guestSpeaker} onChange={(e) => update("guestSpeaker", e.target.checked)} /><span className="guestCheck">✓</span><strong>{data.guestSpeaker ? "Guest speaker included" : "Include a guest speaker"}</strong></span></label>
                 {input("date", "date")}
                 {input("attendees", "number")}
                 {input("startTime", "time")}
