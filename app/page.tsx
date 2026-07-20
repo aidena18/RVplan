@@ -129,6 +129,7 @@ function Icon({ children }: { children: React.ReactNode }) {
 }
 
 export default function Home() {
+  const [view, setView] = useState<"student" | "staff">("student");
   const [step, setStep] = useState(0);
   const [data, setData] = useState<FormData>(initialData);
   const [errors, setErrors] = useState<string[]>([]);
@@ -205,19 +206,20 @@ export default function Home() {
             <span><strong>RV Plan</strong><small>Raritan Valley · Student Life</small></span>
           </a>
           <div className="navActions">
+            <button className="viewSwitch" onClick={() => setView(view === "student" ? "staff" : "student")}>{view === "student" ? "Staff demo" : "Student planner"}</button>
             <a href="https://www.raritanval.edu/student-experience/student-involvement/" target="_blank" rel="noreferrer">Explore student life</a>
             <button className="helpButton" onClick={() => setHelpOpen(true)}><Icon>✦</Icon> Talk to Student Life</button>
           </div>
         </nav>
         <div className="heroCopy">
-          <p className="eyebrow">RV Plan · Student club event request</p>
-          <h1>Plan your club event<br />with confidence.</h1>
-          <p>Answer a few questions and leave with room guidance, food estimates, and a personalized checklist for making your event happen.</p>
+          <p className="eyebrow">RV Plan · {view === "student" ? "Student club event request" : "Student Life staff demo"}</p>
+          <h1>{view === "student" ? <>Plan your club event<br />with confidence.</> : <>Manage student events<br />in one place.</>}</h1>
+          <p>{view === "student" ? "Answer a few questions and leave with room guidance, food estimates, and a personalized checklist for making your event happen." : "Review requests, understand student needs, and coordinate rooms, budgets, food, and follow-up."}</p>
         </div>
         <div className="heroStamp" aria-hidden="true"><span>PLAN</span><strong>IT!</strong></div>
       </header>
 
-      <section className="workspace" aria-label="Event planning form">
+      {view === "student" ? <section className="workspace" aria-label="Event planning form">
         <div className="progressHeader">
           <div className="progressMeta"><strong>Step {step + 1} of 6</strong><span>{Math.round(((step + 1) / 6) * 100)}% complete</span></div>
           <div className="progressBar"><span style={{ width: `${((step + 1) / 6) * 100}%` }} /></div>
@@ -386,7 +388,37 @@ export default function Home() {
             <p className="privacyNote"><Icon>●</Icon> This planning tool does not replace RVCC’s official reservation or approval process.</p>
           </aside>
         </div>
-      </section>
+      </section> : <section className="staffWorkspace" aria-label="Staff event request dashboard">
+        <div className="staffHeader">
+          <div><p className="eyebrow dark">STAFF DEMO</p><h2>Event request dashboard</h2><span>See what students need and keep every request moving.</span></div>
+          <button className="primaryButton" onClick={() => setView("student")}>+ Open student planner</button>
+        </div>
+        <div className="staffStats">
+          <article><span>OPEN REQUESTS</span><strong>8</strong><small>3 need action this week</small></article>
+          <article><span>AWAITING BUDGET</span><strong>3</strong><small>$2,340 requested</small></article>
+          <article><span>ROOMS TO CONFIRM</span><strong>4</strong><small>2 events within 14 days</small></article>
+          <article><span>UPCOMING EVENTS</span><strong>11</strong><small>Across 8 student clubs</small></article>
+        </div>
+        <div className="staffLayout">
+          <section className="requestPanel">
+            <div className="panelHeading"><div><p className="eyebrow dark">REQUEST QUEUE</p><h3>Student event plans</h3></div><div className="staffFilters"><button className="active">All</button><button>Needs review</button><button>Approved</button></div></div>
+            <div className="requestTable" role="table" aria-label="Student event requests">
+              <div className="requestRow tableHead" role="row"><span>Event</span><span>Date</span><span>Needs</span><span>Status</span></div>
+              {[
+                { event: data.eventName || "International Game Night", club: data.clubName || "Global Connections Club", date: data.date || "Oct 24", needs: budgetAmount > 0 ? `Room · $${budgetAmount.toLocaleString()}` : "Room · Food", status: submitted ? "New submission" : "Needs review", tone: "review" },
+                { event: "Fall Cultural Showcase", club: "Asian Student Association", date: "Nov 7", needs: "Stage · Catering", status: "Room pending", tone: "pending" },
+                { event: "Film Club Movie Night", club: "Film Club", date: "Nov 14", needs: "Auditorium · AV", status: "Approved", tone: "approved" },
+                { event: "Holiday Bake Sale", club: "Business Club", date: "Dec 3", needs: "Tables · Budget", status: "Budget review", tone: "review" },
+              ].map((request) => <button className="requestRow" role="row" key={request.event}><span><strong>{request.event}</strong><small>{request.club}</small></span><span>{request.date}</span><span>{request.needs}</span><span><b className={`status ${request.tone}`}>{request.status}</b><i>→</i></span></button>)}
+            </div>
+          </section>
+          <aside className="staffSidebar">
+            <section><p className="eyebrow dark">TODAY'S PRIORITIES</p><h3>Keep these moving</h3><ul><li><b>1</b><span><strong>Review budget requests</strong><small>3 proposals are waiting</small></span></li><li><b>2</b><span><strong>Confirm event rooms</strong><small>4 requests need a location</small></span></li><li><b>3</b><span><strong>Send student updates</strong><small>2 confirmations are ready</small></span></li></ul></section>
+            <section className="needsSnapshot"><p className="eyebrow dark">STUDENT NEEDS</p><h3>At a glance</h3><div><span>Projector / screen <b>6</b></span><span>Food support <b>5</b></span><span>Budget funding <b>3</b></span><span>Accessibility notes <b>2</b></span></div></section>
+          </aside>
+        </div>
+        <div className="demoNote"><Icon>i</Icon><div><strong>Demo workspace</strong><p>This staff dashboard uses sample requests for demonstration. Connect it to RVCC’s official workflow before using it for live approvals.</p></div></div>
+      </section>}
 
       <footer><div className="footerBrand"><img src="/rvcc-logo.png" alt="" /><span><strong>RV Plan</strong><small>Raritan Valley Community College · Student Life</small></span></div><div><a href="mailto:studentlife@raritanval.edu">studentlife@raritanval.edu</a><a href="tel:+19082188873">908-218-8873</a></div></footer>
 
