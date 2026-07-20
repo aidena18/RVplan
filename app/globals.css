@@ -107,6 +107,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .recommendation strong { font-size: 14px; }
 .recommendation p { margin: 0; color: var(--muted); font-size: 11px; }
 .foodEstimate { margin-top: 18px; background: var(--forest); color: white; border-radius: 10px; padding: 20px 22px; display: flex; justify-content: space-between; align-items: center; }
+.otherFoodField { margin-top: 18px; }
 .foodEstimate > div:first-child { display: flex; flex-direction: column; gap: 4px; }
 .foodEstimate small { color: #c8d8d1; }
 .foodEstimate strong { color: #c3e266; font-size: 25px; }
