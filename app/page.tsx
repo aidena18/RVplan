@@ -32,6 +32,7 @@ type FormData = {
   secondEndTime: string;
   secondLocation: string;
   setCertified: string;
+  eventCategory: string;
   eventPurpose: string;
   coSponsorClubs: string;
   coSponsorDepartments: string;
@@ -80,6 +81,7 @@ const initialData: FormData = {
   secondEndTime: "",
   secondLocation: "",
   setCertified: "No",
+  eventCategory: "Clubs & Organization Involvement",
   eventPurpose: "",
   coSponsorClubs: "",
   coSponsorDepartments: "",
@@ -288,16 +290,18 @@ export default function Home() {
             </>}
 
             {step === 4 && <>
-              <div className="sectionHeading"><span className="sectionIcon">$</span><div><p>Plan the funding</p><h2>Build your budget request.</h2><span>Enter $0 if no funding is needed. A detailed request opens when the estimate is above $0.</span></div></div>
+              <div className="sectionHeading"><span className="sectionIcon">$</span><div><p>Plan the funding</p><h2>Build your budget proposal.</h2><span>Enter $0 if no funding is needed. A detailed proposal opens when the estimate is above $0.</span></div></div>
               <label className="field budgetAmount"><span>Estimated budget</span><span className="moneyInput"><b>$</b><input name="budget" type="number" min="0" step="0.01" value={data.budget} onChange={(e) => update("budget", e.target.value)} placeholder="0.00" /></span></label>
               {budgetAmount === 0 && <div className="noBudget"><Icon>✓</Icon><div><strong>No budget request needed</strong><p>You can continue to your plan. Change the amount above if your event needs funding.</p></div></div>}
               {budgetAmount > 0 && <div className="budgetRequest">
+                <div className="budgetFormHeader"><strong>Club / Organization Budget Request</strong><span>Events & Projects</span></div>
                 <div className="budgetBanner"><div><small>ESTIMATED REQUEST</small><strong>${budgetAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div><span>We preloaded everything you already shared.</span></div>
                 <h3 className="budgetSectionTitle">Event information</h3>
                 <div className="preloadedGrid">
                   <div><small>Sponsoring organization</small><strong>{data.clubName}</strong></div><div><small>Submission date</small><strong>{data.submissionDate}</strong></div>
                   <div><small>Event name</small><strong>{data.eventName}</strong></div><div><small>Event date</small><strong>{data.date}</strong></div>
                   <div><small>Event type</small><strong>{data.eventType}</strong></div><div><small>Expected attendance</small><strong>{data.attendees}</strong></div>
+                  <div><small>Event category</small><strong>{data.eventCategory}</strong></div><div><small>SET certified?</small><strong>{data.setCertified}</strong></div>
                   <div><small>Event time</small><strong>{data.startTime}–{data.endTime}</strong></div><div><small>Semester & year</small><strong>{semester}</strong></div>
                   <div><small>Recommended location</small><strong>{roomRecommendation}</strong></div><div><small>Food plan</small><strong>{data.food === "Other food" ? data.foodOther || "Custom order" : data.food}</strong></div>
                   <div><small>Primary contact</small><strong>{data.studentName} · {data.email}{data.phone ? ` · ${data.phone}` : ""}</strong></div><div><small>Club advisor</small><strong>{data.advisorName}{data.advisorEmail ? ` · ${data.advisorEmail}` : ""}</strong></div>
@@ -305,6 +309,7 @@ export default function Home() {
                 <label className="field full"><span>Short event description and purpose</span><textarea value={data.eventPurpose} onChange={(e) => update("eventPurpose", e.target.value)} placeholder="Describe what will happen, why the event matters, and what students will gain." /></label>
                 <div className="formGrid budgetFields">
                   <label className="field"><span>Setup time</span><input type="time" value={data.setupTime} onChange={(e) => update("setupTime", e.target.value)} /></label>
+                  <label className="field"><span>Event category</span><select value={data.eventCategory} onChange={(e) => update("eventCategory", e.target.value)}><option>Clubs & Organization Involvement</option><option>Academic enrichment</option><option>Civic engagement</option><option>Cultural engagement</option><option>Leadership development</option><option>Health & wellness</option><option>Other</option></select></label>
                   <label className="field"><span>SET certified?</span><select value={data.setCertified} onChange={(e) => update("setCertified", e.target.value)}><option>No</option><option>Yes</option><option>Not sure</option></select></label>
                 </div>
                 <h3 className="budgetSectionTitle">Second-choice schedule</h3>
