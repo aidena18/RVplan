@@ -360,13 +360,13 @@ export default function Home() {
                   ["3", "Finalize details and promote your event", "After confirmation, finalize access, setup, cleanup, food delivery, and campus promotion."],
                 ].map(([number, title, detail]) => <div className="nextRow" key={number}><span>{number}</span><div><strong>{title}</strong><p>{detail}</p></div><b>○</b></div>)}
               </div>
-              {submitted && <div className="successNote"><Icon>✓</Icon><div><strong>Planning brief created</strong><p>No information has been sent yet. Email or visit Student Life to begin the official request.</p></div></div>}
+              {submitted && <div className="successNote"><Icon>✓</Icon><div><strong>Plan submitted</strong><p>Your plan has been submitted. Watch your RVCC email for next steps.</p></div></div>}
             </>}
 
             <div className="formFooter">
               <button className="backButton" onClick={() => setStep((current) => Math.max(0, current - 1))} disabled={step === 0}>← Back</button>
               <span>Your information stays on this device.</span>
-              {step < 5 ? <button className="primaryButton" onClick={next}>Continue to {steps[step + 1][0].toLowerCase()} <span>→</span></button> : <div className="finalActions"><button className="printButton" onClick={() => window.print()}>Print plan</button><button className="primaryButton" onClick={() => setSubmitted(true)}>{submitted ? "Plan created ✓" : "Create my plan →"}</button></div>}
+              {step < 5 ? <button className="primaryButton" onClick={next}>Continue to {steps[step + 1][0].toLowerCase()} <span>→</span></button> : <div className="finalActions"><button className="printButton" onClick={() => window.print()}>Print plan</button><button className="primaryButton" onClick={() => setSubmitted(true)}>{submitted ? "Plan submitted ✓" : "Submit my plan →"}</button></div>}
             </div>
           </section>
 
