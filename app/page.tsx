@@ -11,6 +11,7 @@ type FormData = {
   advisorEmail: string;
   eventName: string;
   eventType: string;
+  guestSpeaker: boolean;
   rsvpPlan: string;
   eventDetails: string;
   date: string;
@@ -35,6 +36,7 @@ const initialData: FormData = {
   advisorEmail: "",
   eventName: "",
   eventType: "Regular club meeting",
+  guestSpeaker: false,
   rsvpPlan: "Not sure yet",
   eventDetails: "",
   date: "",
@@ -197,7 +199,8 @@ export default function Home() {
               <div className="sectionHeading"><span className="sectionIcon">⌁</span><div><p>Shape the idea</p><h2>Tell us about your event.</h2><span>An estimate is fine—you can confirm details with staff later.</span></div></div>
               <div className="formGrid">
                 {input("eventName", "text", "e.g., Game Night & Pizza")}
-                <label className="field"><span>Event type</span><select value={data.eventType} onChange={(e) => update("eventType", e.target.value)}><option>Regular club meeting</option><option>Formal showcase</option><option>Performance</option><option>Bake sale</option><option>Fundraiser</option><option>Field trip</option><option>Off-campus event</option><option>Workshop</option><option>Guest speaker</option><option>Holiday celebration</option><option>Cultural celebration</option><option>Movie night</option><option>Other</option></select></label>
+                <label className="field"><span>Event type</span><select value={data.eventType} onChange={(e) => update("eventType", e.target.value)}><option>Regular club meeting</option><option>Formal showcase</option><option>Performance</option><option>Bake sale</option><option>Fundraiser</option><option>Field trip</option><option>Off-campus event</option><option>Workshop</option><option>Holiday celebration</option><option>Cultural celebration</option><option>Movie night</option><option>Other</option></select></label>
+                <label className={`guestSpeakerChoice full ${data.guestSpeaker ? "selected" : ""}`}><input type="checkbox" checked={data.guestSpeaker} onChange={(e) => update("guestSpeaker", e.target.checked)} /><span className="guestCheck">✓</span><span><strong>Guest speaker</strong><small>Check this box if someone outside your club will speak or present.</small></span></label>
                 {input("date", "date")}
                 {input("attendees", "number")}
                 {input("startTime", "time")}
@@ -238,7 +241,7 @@ export default function Home() {
 
             {step === 4 && <>
               <div className="sectionHeading"><span className="sectionIcon">✓</span><div><p>Your planning roadmap</p><h2>{submitted ? "Your request is ready." : "Review your event plan."}</h2><span>{submitted ? "Bring this plan to Student Life to start the official approval process." : "Check the details, then create your planning checklist."}</span></div></div>
-              <div className="summaryHero"><div><small>{data.eventType.toUpperCase()}</small><h3>{data.eventName || "Your club event"}</h3><p>{data.clubName} · {data.date ? new Date(`${data.date}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "Date to be confirmed"} · {data.attendees} guests · {data.rsvpPlan}</p></div><button onClick={() => setStep(1)}>Edit details</button></div>
+              <div className="summaryHero"><div><small>{data.eventType.toUpperCase()}</small><h3>{data.eventName || "Your club event"}</h3><p>{data.clubName} · {data.date ? new Date(`${data.date}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "Date to be confirmed"} · {data.attendees} guests · {data.rsvpPlan}{data.guestSpeaker ? " · Guest speaker" : ""}</p></div><button onClick={() => setStep(1)}>Edit details</button></div>
               <div className="summaryGrid">
                 <div><span className="summaryIcon">⌂</span><small>SPACE</small><strong>{roomRecommendation}</strong><p>{data.roomNeeds.length ? data.roomNeeds.join(" · ") : "Standard room setup"}</p></div>
                 <div><span className="summaryIcon">◒</span><small>FOOD</small><strong>{data.food === "Pizza" ? `${pizzaCount} large pizzas + ${drinkCount} drinks` : data.food === "Snacks & drinks" ? `${snackCount} snacks + ${drinkCount} drinks` : "No food requested"}</strong><p>{data.dietary.length ? `Plan for: ${data.dietary.join(", ")}` : "No dietary needs listed"}</p></div>
