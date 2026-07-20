@@ -353,12 +353,11 @@ export default function Home() {
               </div>
               <div className="budgetSummary"><span>$</span><div><small>BUDGET</small><strong>{budgetAmount > 0 ? `$${budgetAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} estimated request` : "No funding requested"}</strong><p>{budgetAmount > 0 ? "Review the completed budget details with Student Life before making purchases." : "No budget request form is needed based on your estimate."}</p></div><button onClick={() => setStep(4)}>Edit budget</button></div>
               <div className="nextSteps">
-                <div className="nextTitle"><span>YOUR NEXT STEPS</span><strong>Start early—room and food approvals take time.</strong></div>
+                <div className="nextTitle"><span>YOUR NEXT STEPS</span><strong>Watch your RVCC email for approvals and confirmation.</strong></div>
                 {[
                   ["1", "Review this plan with your club advisor", "Confirm the purpose, budget, date, and attendance estimate."],
-                  ["2", "Contact Student Life to reserve your space", "Ask about room availability, required forms, and the approval timeline."],
-                  ["3", "Confirm funding before ordering", "Do not purchase food or supplies until Student Life confirms the process."],
-                  ["4", "Finalize details and promote your event", "Confirm access, setup, cleanup, food delivery, and campus promotion."],
+                  ["2", "Look out for confirmation emails", "Student Government will email you about budget approval, and Student Life will email you to confirm your event booking."],
+                  ["3", "Finalize details and promote your event", "After confirmation, finalize access, setup, cleanup, food delivery, and campus promotion."],
                 ].map(([number, title, detail]) => <div className="nextRow" key={number}><span>{number}</span><div><strong>{title}</strong><p>{detail}</p></div><b>○</b></div>)}
               </div>
               {submitted && <div className="successNote"><Icon>✓</Icon><div><strong>Planning brief created</strong><p>No information has been sent yet. Email or visit Student Life to begin the official request.</p></div></div>}
