@@ -129,7 +129,8 @@ function Icon({ children }: { children: React.ReactNode }) {
 }
 
 export default function Home() {
-  const [view, setView] = useState<"student" | "staff">("student");
+  const [view, setView] = useState<"home" | "student" | "coach" | "staff">("home");
+  const [coachGoal, setCoachGoal] = useState("");
   const [staffView, setStaffView] = useState<"all" | "fran" | "kiswah" | "alaysha">("all");
   const [step, setStep] = useState(0);
   const [data, setData] = useState<FormData>(initialData);
@@ -202,25 +203,33 @@ export default function Home() {
     <main>
       <header className="hero">
         <nav className="topbar" aria-label="Main navigation">
-          <a className="brand" href="https://www.raritanval.edu/" target="_blank" rel="noreferrer">
+          <button className="brand homeBrand" onClick={() => setView("home")}>
             <span className="logoBox"><img src="/rvcc-logo.png" alt="RVCC lion logo" /></span>
             <span><strong>RVplan</strong><small>Raritan Valley · Student Life</small></span>
-          </a>
+          </button>
           <div className="navActions">
-            <button className="viewSwitch" onClick={() => setView(view === "student" ? "staff" : "student")}>{view === "student" ? "Staff demo" : "Student planner"}</button>
+            {view !== "home" && <button className="navHome" onClick={() => setView("home")}>Home</button>}
+            <button className="viewSwitch" onClick={() => setView(view === "staff" ? "student" : "staff")}>{view === "staff" ? "Student planner" : "Staff demo"}</button>
             <a href="https://www.raritanval.edu/student-experience/student-involvement/" target="_blank" rel="noreferrer">Explore student life</a>
             <button className="helpButton" onClick={() => setHelpOpen(true)}><Icon>✦</Icon> Talk to Student Life</button>
           </div>
         </nav>
         <div className="heroCopy">
-          <p className="eyebrow">RVplan · {view === "student" ? "Student club event request" : "Student Life staff demo"}</p>
-          <h1>{view === "student" ? <>Plan your club event<br />with confidence.</> : <>Manage student events<br />in one place.</>}</h1>
-          <p>{view === "student" ? "Answer a few questions and leave with room guidance, food estimates, and a personalized checklist for making your event happen." : "Review requests, understand student needs, and coordinate rooms, budgets, food, and follow-up."}</p>
+          <p className="eyebrow">RVplan · {view === "home" ? "Tools for student club leaders" : view === "student" ? "Student club event request" : view === "coach" ? "AI-powered club leadership coach" : "Student Life staff demo"}</p>
+          <h1>{view === "home" ? <>Lead your club.<br />We’ll help with the rest.</> : view === "student" ? <>Plan your club event<br />with confidence.</> : view === "coach" ? <>Start your term<br />with a clear plan.</> : <>Manage student events<br />in one place.</>}</h1>
+          <p>{view === "home" ? "Choose what you want to work on today—from planning a successful event to organizing your club’s entire semester." : view === "student" ? "Answer a few questions and leave with room guidance, food estimates, and a personalized checklist for making your event happen." : view === "coach" ? "Get guided support for goals, meetings, officer roles, member engagement, and a strong start to the semester." : "Review requests, understand student needs, and coordinate rooms, budgets, food, and follow-up."}</p>
         </div>
         <div className="heroStamp" aria-hidden="true"><span>PLAN</span><strong>IT!</strong></div>
       </header>
 
-      {view === "student" ? <section className="workspace" aria-label="Event planning form">
+      {view === "home" ? <section className="homeWorkspace" aria-label="RVplan tools">
+        <div className="homeIntro"><p className="eyebrow dark">WHAT DO YOU WANT TO DO?</p><h2>Choose your starting point.</h2><span>Both tools turn your answers into practical next steps for your club.</span></div>
+        <div className="toolChoices">
+          <button className="toolCard eventTool" onClick={() => { setStep(0); setView("student"); }}><span className="toolNumber">01</span><span className="toolIcon">✦</span><div><small>EVENT PLANNER</small><h3>Start planning an event</h3><p>Plan the room, date, attendance, food, supplies, budget, and approval steps.</p><ul><li>Personalized event checklist</li><li>Room and pizza guidance</li><li>Budget proposal builder</li></ul><strong>Plan an event <b>→</b></strong></div></button>
+          <button className="toolCard coachTool" onClick={() => setView("coach")}><span className="aiBadge">AI POWERED</span><span className="toolIcon">◎</span><div><small>CLUB LEADERSHIP COACH</small><h3>Start your term</h3><p>Build a semester roadmap, organize your officers, and create goals that keep members involved.</p><ul><li>First-meeting agenda</li><li>Officer role planning</li><li>Term goals and milestones</li></ul><strong>Meet your coach <b>→</b></strong></div></button>
+        </div>
+        <div className="homeSupport"><span>?</span><p><strong>Not sure where to begin?</strong> Student Life can help you choose the right path.</p><button onClick={() => setHelpOpen(true)}>Talk to Student Life →</button></div>
+      </section> : view === "student" ? <section className="workspace" aria-label="Event planning form">
         <div className="progressHeader">
           <div className="progressMeta"><strong>Step {step + 1} of 6</strong><span>{Math.round(((step + 1) / 6) * 100)}% complete</span></div>
           <div className="progressBar"><span style={{ width: `${((step + 1) / 6) * 100}%` }} /></div>
@@ -389,6 +398,13 @@ export default function Home() {
             <p className="privacyNote"><Icon>●</Icon> This planning tool does not replace RVCC’s official reservation or approval process.</p>
           </aside>
         </div>
+      </section> : view === "coach" ? <section className="coachWorkspace" aria-label="Club leadership coach">
+        <div className="coachTop"><button onClick={() => setView("home")}>← Back to tools</button><span>AI-POWERED GUIDED DEMO</span></div>
+        <div className="coachGrid">
+          <section className="coachConversation"><div className="coachHeading"><span>◎</span><div><p className="eyebrow dark">CLUB LEADERSHIP COACH</p><h2>Let’s set your club up for a strong term.</h2><p>Tell me what you want help with, or choose a common starting point below.</p></div></div><div className="coachPrompts">{["Plan our first club meeting", "Set goals for the semester", "Organize officer responsibilities", "Get more members involved"].map((prompt) => <button key={prompt} onClick={() => setCoachGoal(prompt)}>{prompt}<span>→</span></button>)}</div><label className="coachInput"><span>What would you like help with?</span><textarea value={coachGoal} onChange={(event) => setCoachGoal(event.target.value)} placeholder="For example: We have four officers and want to plan our first month…" /><button onClick={() => setCoachGoal(coachGoal || "Plan our first club meeting")}>Build my term plan →</button></label></section>
+          <aside className="termPreview"><p className="eyebrow dark">YOUR TERM ROADMAP</p><h3>A strong start in four steps</h3><ol><li><b>1</b><span><strong>Align your officers</strong><small>Confirm roles, communication, and responsibilities.</small></span></li><li><b>2</b><span><strong>Set 2–3 clear goals</strong><small>Choose goals your members can understand and support.</small></span></li><li><b>3</b><span><strong>Plan your first month</strong><small>Schedule meetings, outreach, and one early win.</small></span></li><li><b>4</b><span><strong>Check in and adjust</strong><small>Review progress with your advisor and officers.</small></span></li></ol><div><strong>What the coach can create</strong><span>Meeting agendas · officer checklists · recruitment ideas · term calendars</span></div></aside>
+        </div>
+        <div className="demoNote"><Icon>i</Icon><div><strong>AI coach demo</strong><p>This preview demonstrates the leadership-coach experience. Connect an approved AI service before using generated guidance live.</p></div></div>
       </section> : <section className="staffWorkspace" aria-label="Staff event request dashboard">
         <div className="staffHeader">
           <div><p className="eyebrow dark">STAFF DEMO</p><h2>Event request dashboard</h2><span>See what students need and keep every request moving.</span></div>
