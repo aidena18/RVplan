@@ -288,7 +288,7 @@ export default function Home() {
         <div className="homeIntro"><p className="eyebrow dark">GET STARTED</p><h2>What do you want to do?</h2></div>
         <div className="toolChoices">
           <button className="toolCard eventTool" onClick={() => { setStep(0); setView("student"); }}><span className="toolIcon">✦</span><div><small>EVENT PLANNER</small><h3>Plan an event</h3><p>Answer a few questions to get guidance for your room, food, budget, and approvals.</p><strong>Start planning <b>→</b></strong></div></button>
-          <button className="toolCard coachTool" onClick={() => { setCoachMode("welcome"); setView("coach"); }}><span className="toolIcon">◎</span><div><small>LEADERSHIP COACH</small><h3>Start your term</h3><p>Use an AI-powered club leadership coach to organize officers, set goals, and plan your semester.</p><strong>Meet your coach <b>→</b></strong></div></button>
+          <button className="toolCard coachTool" onClick={() => { setCoachMode("welcome"); setView("coach"); }}><span className="toolIcon">◎</span><div><small>CLUB LEADERSHIP</small><h3>AI Leadership Coach</h3><p>Get personalized guidance to organize officers, set goals, and build your semester plan.</p><strong>Start coaching <b>→</b></strong></div></button>
         </div>
       </section> : view === "student" ? <section className="workspace" aria-label="Event planning form">
         <div className="progressHeader">
