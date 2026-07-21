@@ -581,6 +581,88 @@ button.requestRow:hover { background: #f8faef; }
 .followUpRows dd { margin: 0; font-weight: 700; }
 .followUpRows article > div:last-child { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
 .followUpRows button { border: 1px solid #ccd6d1; background: white; color: var(--forest); border-radius: 5px; padding: 6px; font-size: 7px; }
+.followUpRows select { border: 1px solid #ccd6d1; background: white; color: var(--forest); border-radius: 5px; padding: 6px; font-size: 7px; }
+
+/* Simplified interface layer */
+.app { --soft: #f7f9f6; }
+.app .hero { height: 360px; }
+.app .heroCopy { margin-top: 42px; }
+.app .heroCopy h1 { max-width: 650px; }
+.app .workspace, .app .homeWorkspace, .app .coachWorkspace, .app .staffWorkspace { margin-top: -34px; }
+.app .eyebrow { letter-spacing: .11em; }
+.app button { transition: background-color .16s ease, border-color .16s ease, transform .16s ease; }
+.app button:active { transform: translateY(1px); }
+.view-home .heroStamp, .view-coach .heroStamp, .view-staff .heroStamp { opacity: .5; }
+.homeWorkspace { padding: 36px; }
+.toolChoices { gap: 16px; }
+.toolCard { min-height: 350px; padding: 27px; box-shadow: 0 6px 20px rgba(18,63,46,.05); }
+.toolCard h3 { font-size: 25px; }
+.homeSupport { margin-top: 16px; }
+.setupExperience { max-width: 1050px; margin: 0 auto; }
+.setupHeader { padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.setupHeader .eyebrow { margin-bottom: 6px; }
+.setupProgress ol { display: flex; justify-content: center; gap: 8px; margin: 13px 0 20px; }
+.setupProgress li { flex: 0 0 auto; }
+.setupProgress button { min-width: 22px; justify-content: center; }
+.setupProgress button span { display: none; }
+.setupProgress .active button span { display: inline; margin-left: 2px; }
+.setupProgress .active button { min-width: auto; padding-right: 8px; background: #eef4df; border-radius: 99px; }
+.setupBody { padding: 32px; min-height: 430px; border: 0; box-shadow: 0 8px 28px rgba(18,63,46,.07); }
+.setupTitle { max-width: 670px; }
+.setupTitle h3 { font-size: 26px; }
+.setupFormGrid { gap: 18px 20px; }
+.setupFormGrid input, .setupFormGrid select, .setupFormGrid textarea, .setupWideField textarea { padding: 12px; border-color: #d7dfdb; }
+.goalCards { grid-template-columns: repeat(3, 1fr); gap: 8px; max-height: 240px; overflow-y: auto; padding: 2px 5px 2px 2px; }
+.goalCards button { min-height: 42px; }
+.challengeChips { max-height: 130px; overflow-y: auto; padding: 2px; }
+.constitutionChoices { grid-template-columns: repeat(2, 1fr); }
+.constitutionChoices button { min-height: 52px; }
+.setupFooter { max-width: 1050px; margin: 15px auto 0; }
+.personalizedCoach { padding: 30px; }
+.compactProfile { grid-template-columns: 1fr auto; align-items: end; padding-bottom: 15px; border-bottom: 1px solid var(--line); }
+.compactProfile h2 { font-size: 25px; }
+.compactProfile > label { min-width: 220px; display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: 8px; font-weight: 750; }
+.compactProfile select, .clubFilterSelect select { border: 1px solid #ccd7d1; background: white; color: var(--ink); border-radius: 8px; padding: 10px 12px; font-size: 10px; }
+.contextStrip { background: #173f31; margin: 14px 0; }
+.contextStrip > span { padding: 11px 14px; }
+.coachShell { grid-template-columns: 145px minmax(0, 1fr) 265px; min-height: 590px; }
+.coachTabs { padding: 14px 8px; }
+.coachTabs button { padding: 10px; }
+.coachResult { padding: 22px; }
+.aiResultHeader > b { display: none; }
+.analysisColumns { grid-template-columns: 1fr; }
+.analysisColumns section { display: grid; grid-template-columns: 150px 1fr; gap: 5px 12px; padding: 11px 13px; }
+.analysisColumns h4 { grid-row: 1 / span 4; }
+.analysisColumns p { margin: 1px 0; }
+.recommendationGrid { grid-template-columns: 1fr; }
+.recommendationGrid article { display: grid; grid-template-columns: 1.2fr 1fr; gap: 8px 14px; padding: 16px; }
+.recommendationGrid article > span { display: none; }
+.recommendationGrid h4, .recommendationGrid article > p { grid-column: 1; }
+.recommendationGrid article > div:not(.feedbackRow), .recommendationGrid dl { grid-column: 2; }
+.recommendationGrid .feedbackRow, .recommendationGrid em { grid-column: 1/-1; }
+.eventIdeas { grid-template-columns: 1fr; }
+.coachSidePanel { padding: 14px; }
+.coachSidePanel section { padding: 15px; }
+.savedContext { background: white; border: 1px solid var(--line); border-radius: 9px; padding: 13px; }
+.savedContext summary { cursor: pointer; color: var(--forest); font-size: 9px; font-weight: 800; }
+.savedContext ul { margin-top: 10px; }
+.questionChips button:nth-child(n+3) { display: none; }
+.demoNote { opacity: .82; }
+.staffWorkspace { padding: 30px; }
+.staffHeader { margin-bottom: 20px; }
+.staffHeader h2 { font-size: 30px; }
+.staffFolders { gap: 9px; }
+.staffFolder { min-height: 70px; padding: 15px 12px 10px; }
+.sharedViewNote { margin-bottom: 12px; }
+.clubFilterSelect { width: 230px; display: flex; flex-direction: column; gap: 5px; margin: 8px 0 16px; color: var(--muted); font-size: 8px; font-weight: 750; }
+.staffStats { gap: 10px; }
+.staffStats article { padding: 16px; }
+.staffStats strong { font-size: 29px; }
+.requestRow { padding: 14px 20px; }
+.followUpQueue .panelHeading { padding: 18px 20px; }
+.followUpRows article { padding: 14px 20px; }
+.followUpRows article > div:last-child { display: flex; gap: 6px; }
+.followUpRows article > div:last-child > * { flex: 1; }
 
 footer { min-height: 120px; padding: 28px max(32px, calc((100vw - 1352px) / 2)); background: #e7ebe8; display: flex; justify-content: space-between; align-items: center; }
 .footerBrand { display: flex; gap: 13px; align-items: center; }
@@ -639,6 +721,13 @@ footer a { color: var(--forest); font-size: 12px; font-weight: 750; }
   .staffLayout { grid-template-columns: 1fr; }
   .followUpRows article { grid-template-columns: 1fr 1fr; }
   .followUpRows article > div:last-child { grid-column: 1/-1; }
+  .app .hero { height: 350px; }
+  .compactProfile { grid-template-columns: 1fr; }
+  .compactProfile > label { min-width: 0; }
+  .coachShell { grid-template-columns: 115px minmax(0, 1fr); }
+  .analysisColumns section { grid-template-columns: 1fr; }
+  .analysisColumns h4 { grid-row: auto; }
+  .recommendationGrid article { display: block; }
 }
 
 @media (max-width: 620px) {
@@ -719,6 +808,13 @@ footer a { color: var(--forest); font-size: 12px; font-weight: 750; }
   .requestRow > span:nth-child(3) { display: none; }
   .followUpRows article { grid-template-columns: 1fr; }
   .followUpRows article > div:last-child { grid-column: auto; }
+  .app .hero { height: 335px; }
+  .app .heroCopy { margin-top: 38px; }
+  .setupBody { padding: 22px 16px; }
+  .goalCards { grid-template-columns: 1fr 1fr; }
+  .constitutionChoices { grid-template-columns: 1fr; }
+  .staffFolders { display: flex; overflow-x: auto; }
+  .staffFolder { min-width: 150px; }
 }
 
 @media print {
