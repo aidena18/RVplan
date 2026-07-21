@@ -823,3 +823,117 @@ footer a { color: var(--forest); font-size: 12px; font-weight: 750; }
   .contentGrid { display: block; }
   .formCard { border: 0; padding: 10px; }
 }
+
+/* Readability pass: larger type and less content at once */
+.app { font-size: 16px; }
+.app p { font-size: 14px; line-height: 1.55; }
+.app small { font-size: 11px; line-height: 1.4; }
+.app button, .app select, .app input, .app textarea { font-size: 13px; }
+.app .eyebrow { font-size: 12px; }
+.app .heroCopy > p:last-child { font-size: 18px; max-width: 580px; }
+.app .brand small { font-size: 12px; }
+.app .navActions a, .app .navHome, .app .viewSwitch { font-size: 13px; }
+.homeIntro h2 { font-size: 38px; }
+.homeWorkspace { max-width: 1050px; }
+.toolCard { min-height: 290px; }
+.toolCard small { font-size: 12px; }
+.toolCard h3 { font-size: 30px; margin-top: 10px; }
+.toolCard p { font-size: 16px; min-height: 50px; }
+.toolCard > div > strong { display: inline-block; margin-top: 26px; font-size: 15px; }
+.homeSupport p { font-size: 13px; }
+.supportRail .previewCard, .supportRail .privacyNote { display: none; }
+.supportRail { background: #f7f9f6; }
+.helpCard p { font-size: 13px !important; }
+.helpCard button { font-size: 13px; }
+.progressMeta { font-size: 14px; }
+.stepList button { font-size: 13px; }
+.sectionHeading p { font-size: 11px; }
+.sectionHeading > div > span { font-size: 15px; }
+.field { font-size: 14px; }
+.field em { font-size: 12px; }
+.choiceCard strong, .checkGrid label { font-size: 14px; }
+.formFooter > span { display: none; }
+.coachWelcome > p:not(.eyebrow) { font-size: 16px; }
+.coachEntryChoices small { font-size: 11px; }
+.coachEntryChoices h3 { font-size: 24px; }
+.coachEntryChoices p { font-size: 14px; }
+.coachEntryChoices strong, .advisorDemoLink { font-size: 14px; }
+.setupHeader h2 { font-size: 32px; }
+.setupHeader > div:first-child > span { font-size: 13px; }
+.setupHeader button { font-size: 12px; }
+.setupProgress button { font-size: 12px; }
+.setupTitle p { font-size: 14px; }
+.setupFormGrid label, .setupWideField { font-size: 13px; }
+.setupFormGrid input, .setupFormGrid select, .setupFormGrid textarea, .setupWideField textarea { font-size: 14px; }
+.constitutionChoices button { font-size: 13px; }
+.constitutionExtract p, .constitutionExtract small, .constitutionExtract label { font-size: 12px; }
+.cabinetRow input, .cabinetRow select, .cabinetRow textarea { font-size: 12px; }
+.sourceLegend span, .sourceBadge { font-size: 10px; }
+.permissionNote { font-size: 13px; }
+.financeHero label { font-size: 13px; }
+.balanceEquation small { font-size: 11px; }
+.selectionHeading { font-size: 14px; }
+.goalCards button, .challengeChips button { font-size: 12px; }
+.reviewGrid span { font-size: 10px; }
+.reviewGrid h4 { font-size: 14px; }
+.reviewGrid p { font-size: 12px; }
+.reviewGrid button { font-size: 12px; }
+.generatePlanButton { font-size: 15px; }
+.setupFooter > button { font-size: 13px; }
+.profileSwitcher > div:first-child > span { font-size: 13px; }
+.compactProfile > label, .clubFilterSelect { font-size: 12px; }
+.contextStrip small { font-size: 10px; }
+.contextStrip strong { font-size: 13px; }
+.coachTabs button { font-size: 12px; }
+.aiResultHeader small { font-size: 10px; }
+.aiResultHeader h3 { font-size: 22px; }
+.identitySummary { font-size: 15px; }
+.analysisColumns h4, .resultSectionTitle { font-size: 13px; }
+.analysisColumns p { font-size: 12px; }
+.recommendationGrid h4, .eventIdeas h4 { font-size: 16px; }
+.recommendationGrid article > p, .eventIdeas article > div > p { font-size: 13px; min-height: 0; }
+.recommendationGrid small, .eventIdeas small, .growthView small { font-size: 10px; }
+.recommendationGrid article > div strong { font-size: 12px; }
+.recommendationGrid dl, .eventIdeas dl { display: none; }
+.feedbackRow button, .feedbackRow select { font-size: 11px; padding: 8px; }
+.coachSidePanel h3 { font-size: 17px; }
+.questionChips button { font-size: 11px; padding: 9px; }
+.askCoach textarea { font-size: 13px; }
+.coachAnswer small { font-size: 10px; }
+.coachAnswer p { font-size: 13px; }
+.savedContext summary { font-size: 13px; }
+.savedContext li span { font-size: 10px; }
+.savedContext li strong { font-size: 12px; }
+.demoNote p { display: none; }
+.demoNote strong { font-size: 13px; }
+.staffHeader > div > span { font-size: 14px; }
+.staffFolder strong { font-size: 14px; }
+.staffFolder small { font-size: 11px; }
+.sharedViewNote p { font-size: 13px; }
+.staffStats span { font-size: 10px; }
+.staffStats small { display: none; }
+.panelHeading h3, .staffSidebar h3 { font-size: 22px; }
+.requestRow > span { font-size: 13px; }
+.requestRow strong { font-size: 14px; }
+.requestRow small { font-size: 11px; }
+.requestRow.tableHead { font-size: 10px; }
+.requestRow > span:nth-child(3), .requestRow.tableHead > span:nth-child(3) { display: none; }
+.requestRow { grid-template-columns: 2fr .75fr 1fr; }
+.status { font-size: 11px; }
+.staffSidebar li strong { font-size: 13px; }
+.staffSidebar li small { font-size: 11px; }
+.needsSnapshot > div span { font-size: 12px; }
+.followUpQueue .panelHeading > span { display: none; }
+.followUpRows p { font-size: 12px; }
+.followUpRows dl { font-size: 11px; }
+.clubStatus { font-size: 10px; }
+.followUpRows button, .followUpRows select { font-size: 11px; padding: 8px; }
+
+@media (max-width: 620px) {
+  .app .heroCopy > p:last-child { font-size: 16px; }
+  .toolCard { min-height: 260px; }
+  .goalCards { grid-template-columns: 1fr; }
+  .contextStrip > span:nth-child(n+4) { display: none; }
+  .requestRow { grid-template-columns: 1.6fr .8fr; }
+  .requestRow > span:last-child { grid-column: 2; }
+}
