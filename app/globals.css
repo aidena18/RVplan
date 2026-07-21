@@ -73,6 +73,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .coachTool p { color: #c9d8d2; }
 .coachTool li { color: #e8f0ed; }
 .coachTool small { color: #b8dc55; }
+.coachCardGroup { position: relative; min-width: 0; }
+.coachCardGroup .toolCard { width: 100%; height: 100%; padding-bottom: 74px; }
+.coachQuickLinks { position: absolute; z-index: 2; left: 27px; right: 27px; bottom: 24px; display: flex; gap: 8px; flex-wrap: wrap; }
+.coachQuickLinks button { border: 1px solid rgba(255,255,255,.35); border-radius: 7px; padding: 8px 10px; background: transparent; color: white; font-size: 11px; font-weight: 750; }
+.coachQuickLinks button:hover { background: rgba(255,255,255,.1); }
 .aiBadge { position: absolute; right: 22px; top: 22px; padding: 6px 9px; background: #b8dc55; color: var(--forest); border-radius: 99px; font-size: 8px; font-weight: 900; letter-spacing: .1em; }
 .homeSupport { display: flex; align-items: center; gap: 12px; margin-top: 20px; padding: 15px 18px; background: #edf3dc; border-radius: 10px; }
 .homeSupport > span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--forest); color: white; font-weight: 800; }
