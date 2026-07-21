@@ -271,7 +271,7 @@ export default function Home() {
           </button>
           <div className="navActions">
             {view !== "home" && <button className="navHome" onClick={() => setView("home")}>Home</button>}
-            <button className="viewSwitch" onClick={() => setView(view === "staff" ? "student" : "staff")}>{view === "staff" ? "Student planner" : "Staff demo"}</button>
+            {view !== "home" && <button className="viewSwitch" onClick={() => setView(view === "staff" ? "student" : "staff")}>{view === "staff" ? "Student planner" : "Staff demo"}</button>}
             <a href="https://www.raritanval.edu/student-experience/student-involvement/" target="_blank" rel="noreferrer">Explore student life</a>
             <button className="helpButton" onClick={() => setHelpOpen(true)}><Icon>✦</Icon> Talk to Student Life</button>
           </div>
@@ -287,8 +287,8 @@ export default function Home() {
       {view === "home" ? <section className="homeWorkspace" aria-label="RVplan tools">
         <div className="homeIntro"><p className="eyebrow dark">GET STARTED</p><h2>What do you want to do?</h2></div>
         <div className="toolChoices">
-          <button className="toolCard eventTool" onClick={() => { setStep(0); setView("student"); }}><span className="toolIcon">✦</span><div><small>EVENT PLANNER</small><h3>Plan an event</h3><p>Answer a few questions to get guidance for your room, food, budget, and approvals.</p><strong>Start planning <b>→</b></strong></div></button>
-          <div className="coachCardGroup"><button className="toolCard coachTool" onClick={() => { setSetupStep(0); setCoachMode("setup"); setView("coach"); }}><span className="toolIcon">◎</span><div><small>CLUB LEADERSHIP</small><h3>AI Leadership Coach</h3><p>Get personalized guidance to organize officers, set goals, and build your semester plan.</p></div></button><div className="coachQuickLinks"><button onClick={() => { setCoachMode("samples"); setView("coach"); }}>Browse sample clubs</button><button onClick={() => { setCoachMode("advisor"); setView("coach"); }}>Faculty advisor demo</button></div></div>
+          <div className="homeToolGroup"><button className="toolCard eventTool" onClick={() => { setStep(0); setView("student"); }}><span className="toolIcon">✦</span><div><small>EVENT PLANNER</small><h3>Plan an event</h3><p>Answer a few questions to get guidance for your room, food, budget, and approvals.</p><strong>Start planning <b>→</b></strong></div></button><div className="demoLinks"><button onClick={() => setView("staff")}>Staff demo</button></div></div>
+          <div className="homeToolGroup"><button className="toolCard coachTool" onClick={() => { setSetupStep(0); setCoachMode("setup"); setView("coach"); }}><span className="toolIcon">◎</span><div><small>CLUB LEADERSHIP</small><h3>AI Leadership Coach</h3><p>Get personalized guidance to organize officers, set goals, and build your semester plan.</p><strong>Start coaching <b>→</b></strong></div></button><div className="demoLinks"><button onClick={() => { setCoachMode("samples"); setView("coach"); }}>Browse sample clubs</button><button onClick={() => { setCoachMode("advisor"); setView("coach"); }}>Faculty advisor demo</button></div></div>
         </div>
       </section> : view === "student" ? <section className="workspace" aria-label="Event planning form">
         <div className="progressHeader">
