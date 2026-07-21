@@ -278,7 +278,7 @@ export default function Home() {
         </nav>
         <div className="heroCopy">
           <p className="eyebrow">RVplan · {view === "home" ? "Tools for student club leaders" : view === "student" ? "Student club event request" : view === "coach" ? "AI-powered club leadership coach" : "Student Life staff demo"}</p>
-          <h1>{view === "home" ? <>Lead your club.<br />We’ll help with the rest.</> : view === "student" ? <>Plan your club event<br />with confidence.</> : view === "coach" ? <>Start your term<br />with a clear plan.</> : <>Manage student events<br />in one place.</>}</h1>
+          <h1>{view === "home" ? <>Plan events.<br />Build stronger clubs.</> : view === "student" ? <>Plan your club event<br />with confidence.</> : view === "coach" ? <>Start your term<br />with a clear plan.</> : <>Manage student events<br />in one place.</>}</h1>
           <p>{view === "home" ? "Plan an event or organize your club’s semester." : view === "student" ? "Answer a few questions. Get a clear event checklist." : view === "coach" ? "Set goals, organize officers, and plan the semester." : "Review club requests and see what needs attention."}</p>
         </div>
         <div className="heroStamp" aria-hidden="true"><span>PLAN</span><strong>IT!</strong></div>
@@ -287,10 +287,9 @@ export default function Home() {
       {view === "home" ? <section className="homeWorkspace" aria-label="RVplan tools">
         <div className="homeIntro"><p className="eyebrow dark">GET STARTED</p><h2>What do you want to do?</h2></div>
         <div className="toolChoices">
-          <button className="toolCard eventTool" onClick={() => { setStep(0); setView("student"); }}><span className="toolNumber">01</span><span className="toolIcon">✦</span><div><small>EVENT PLANNER</small><h3>Plan an event</h3><p>Room, food, budget, and next steps.</p><strong>Start planning <b>→</b></strong></div></button>
-          <button className="toolCard coachTool" onClick={() => { setCoachMode("welcome"); setView("coach"); }}><span className="aiBadge">AI POWERED</span><span className="toolIcon">◎</span><div><small>LEADERSHIP COACH</small><h3>Start your term</h3><p>Goals, officers, meetings, and a semester plan.</p><strong>Meet your coach <b>→</b></strong></div></button>
+          <button className="toolCard eventTool" onClick={() => { setStep(0); setView("student"); }}><span className="toolIcon">✦</span><div><small>EVENT PLANNER</small><h3>Plan an event</h3><p>Answer a few questions to get guidance for your room, food, budget, and approvals.</p><strong>Start planning <b>→</b></strong></div></button>
+          <button className="toolCard coachTool" onClick={() => { setCoachMode("welcome"); setView("coach"); }}><span className="toolIcon">◎</span><div><small>LEADERSHIP COACH</small><h3>Start your term</h3><p>Use an AI-powered club leadership coach to organize officers, set goals, and plan your semester.</p><strong>Meet your coach <b>→</b></strong></div></button>
         </div>
-        <div className="homeSupport"><span>?</span><p><strong>Not sure where to begin?</strong> Student Life can help you choose the right path.</p><button onClick={() => setHelpOpen(true)}>Talk to Student Life →</button></div>
       </section> : view === "student" ? <section className="workspace" aria-label="Event planning form">
         <div className="progressHeader">
           <div className="progressMeta"><strong>Step {step + 1} of 6</strong><span>{Math.round(((step + 1) / 6) * 100)}% complete</span></div>
