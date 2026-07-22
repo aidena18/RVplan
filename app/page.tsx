@@ -442,22 +442,8 @@ export default function Home() {
             </div>
           </section>
 
-          <aside className="supportRail">
-            <div className="helpCard">
-              <span className="helpIcon">?</span>
-              <p>Need a hand?</p>
-              <h3>Student Life is here to help.</h3>
-              <p>Not sure which room to choose, how funding works, or what needs approval? Ask us.</p>
-              <button onClick={() => setHelpOpen(true)}>Talk to a staff member <span>→</span></button>
-            </div>
-            <div className="previewCard">
-              <p className="eyebrow dark">What you’ll get</p>
-              <h3>A plan built around your event.</h3>
-              <ul><li><Icon>⌂</Icon><span><strong>Room guidance</strong>Matched to your group and setup</span></li><li><Icon>◒</Icon><span><strong>Food estimates</strong>Enough for your expected crowd</span></li><li><Icon>✓</Icon><span><strong>Clear next steps</strong>Know what to do and who to ask</span></li></ul>
-            </div>
-            <p className="privacyNote"><Icon>●</Icon> This planning tool does not replace RVCC’s official reservation or approval process.</p>
-          </aside>
         </div>
+        <div className="compactHelpBar"><span className="helpIcon">?</span><div><strong>Need help planning?</strong><p>Student Life can help with rooms, funding, and approvals.</p></div><button onClick={() => setHelpOpen(true)}>Talk to staff <span>→</span></button></div>
       </section> : view === "coach" ? <section className="coachWorkspace personalizedCoach" aria-label="Club leadership coach">
         {coachMode === "setup" ? <ClubSetupWizard setup={clubSetup} setSetup={setClubSetup} step={setupStep} setStep={setSetupStep} onSave={saveClubDraft} onExit={() => { saveClubDraft(); setView("home"); }} onGenerate={() => setCoachMode("plan")} savedNotice={savedNotice} /> : coachMode === "advisor" ? <div className="advisorPortal">
           <div className="portalHeader"><button onClick={() => setView("home")}>← Back to tools</button><div><p className="eyebrow dark">FACULTY ADVISOR PORTAL · DEMO</p><h2>Advisor review center</h2><span>Review club information, leave guidance, and request Student Life support.</span></div><button onClick={() => setCoachMode("setup")}>View club profile →</button></div>
