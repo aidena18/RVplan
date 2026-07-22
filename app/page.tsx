@@ -271,7 +271,6 @@ export default function Home() {
           </button>
           <div className="navActions">
             {view !== "home" && <button className="navHome" onClick={() => setView("home")}>Home</button>}
-            {view !== "home" && <button className="viewSwitch" onClick={() => setView(view === "staff" ? "student" : "staff")}>{view === "staff" ? "Student planner" : "Staff demo"}</button>}
             <a href="https://www.raritanval.edu/student-experience/student-involvement/" target="_blank" rel="noreferrer">Explore student life</a>
             <button className="helpButton" onClick={() => setHelpOpen(true)}><Icon>✦</Icon> Talk to Student Life</button>
           </div>
