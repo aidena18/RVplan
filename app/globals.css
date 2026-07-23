@@ -597,6 +597,7 @@ button.requestRow:hover { background: #f8faef; }
 /* Simplified interface layer */
 .app { --soft: #f7f9f6; }
 .app .hero { height: 360px; }
+.app.view-home .hero { height: 410px; }
 .app .heroCopy { margin-top: 42px; }
 .app .heroCopy h1 { max-width: 650px; }
 .app .workspace, .app .homeWorkspace, .app .coachWorkspace, .app .staffWorkspace { margin-top: -34px; }
@@ -733,6 +734,7 @@ footer a { color: var(--forest); font-size: 12px; font-weight: 750; }
   .followUpRows article { grid-template-columns: 1fr 1fr; }
   .followUpRows article > div:last-child { grid-column: 1/-1; }
   .app .hero { height: 350px; }
+  .app.view-home .hero { height: 390px; }
   .compactProfile { grid-template-columns: 1fr; }
   .compactProfile > label { min-width: 0; }
   .coachShell { grid-template-columns: 115px minmax(0, 1fr); }
@@ -742,6 +744,7 @@ footer a { color: var(--forest); font-size: 12px; font-weight: 750; }
 }
 
 @media (max-width: 620px) {
+  .app.view-home .hero { height: 360px; }
   .brand strong { font-size: 14px; }
   .brand small { font-size: 9px; }
   .navActions { gap: 7px; }
