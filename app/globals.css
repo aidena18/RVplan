@@ -1061,3 +1061,29 @@ footer a { color: var(--forest); font-size: 12px; font-weight: 750; }
   .view-coach .roadmapView h4 { font-size: 18px; }
   .view-coach .roadmapView p { font-size: 14px; }
 }
+
+/* Professional roadmap treatment */
+.view-coach .roadmapHero { margin-bottom: 24px; padding: 22px 24px; border: 1px solid #dce5df; border-left: 5px solid var(--forest); border-radius: 12px; background: #f7f9f7; color: var(--ink); box-shadow: none; }
+.view-coach .roadmapHero > span { color: #66812f; font-size: 10px; letter-spacing: .1em; }
+.view-coach .roadmapHero h3 { margin-top: 6px; font-size: 25px; }
+.view-coach .roadmapHero p { color: var(--muted); }
+.view-coach .roadmapHero > div { display: none; }
+.view-coach .roadmapView { gap: 14px; max-width: 760px; }
+.view-coach .roadmapView::before { left: 25px; top: 170px; bottom: 54px; width: 2px; border-radius: 0; background: #cad8d0; }
+.view-coach .roadmapView article,
+.view-coach .roadmapView article:nth-child(even) { grid-template-columns: 50px minmax(0,1fr); min-height: 0; margin-left: 0; padding: 19px 22px 19px 12px; border: 1px solid #dfe6e2; border-radius: 12px; background: white; box-shadow: 0 4px 14px rgba(18,63,46,.055); }
+.view-coach .roadmapView article:hover { transform: none; border-color: #aebeb5; }
+.view-coach .roadmapView article > span { width: 28px; height: 28px; margin-left: 0; border: 0; border-radius: 7px; background: var(--forest); color: white; font-size: 12px; box-shadow: none; }
+.view-coach .roadmapView .stepLabel { margin-bottom: 4px; color: #718079; font-size: 9px; letter-spacing: .08em; }
+.view-coach .roadmapView h4 { font-size: 18px; }
+.view-coach .roadmapView p { font-size: 14px; }
+.view-coach .roadmapView .whyNow { padding: 9px 11px; border-radius: 7px; background: #f3f6f3; font-size: 12px; }
+.view-coach .confidence { padding: 5px 8px; border: 1px solid #d7e3d1; border-radius: 6px; background: #f7faf4; color: #58733a; font-size: 9px; }
+
+@media (max-width: 620px) {
+  .view-coach .roadmapHero { padding: 18px; }
+  .view-coach .roadmapHero h3 { font-size: 21px; }
+  .view-coach .roadmapView::before { left: 19px; top: 180px; }
+  .view-coach .roadmapView article,
+  .view-coach .roadmapView article:nth-child(even) { grid-template-columns: 38px minmax(0,1fr); padding: 17px 14px 17px 9px; }
+}
