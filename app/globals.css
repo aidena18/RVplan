@@ -1030,3 +1030,34 @@ footer a { color: var(--forest); font-size: 12px; font-weight: 750; }
   .view-coach .coachChatLauncher { right: 12px; bottom: 12px; }
   .view-coach .coachSidePanel { right: 10px; bottom: 76px; width: calc(100vw - 20px); max-height: 68vh; }
 }
+
+/* Roadmap journey */
+.view-coach .coachResult:has(.roadmapView) .aiResultHeader { display: none; }
+.view-coach .coachResult:has(.roadmapView) { max-width: 900px; margin: 0 auto; padding-top: 26px; }
+.view-coach .roadmapHero { margin-bottom: 30px; padding: 24px 26px; border-radius: 22px; background: linear-gradient(135deg, #123f2e, #1d5c43); color: white; box-shadow: 0 8px 0 #0a3325; }
+.view-coach .roadmapHero > span { color: #b8dc55; font-size: 11px; font-weight: 900; letter-spacing: .12em; }
+.view-coach .roadmapHero h3 { margin: 7px 0 6px; font-size: 28px; line-height: 1.15; letter-spacing: -.035em; }
+.view-coach .roadmapHero p { margin: 0; color: #d9e6e0; font-size: 14px; }
+.view-coach .roadmapHero > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-top: 18px; }
+.view-coach .roadmapHero i { height: 8px; border-radius: 8px; background: var(--lime); box-shadow: inset 0 -2px rgba(0,0,0,.14); }
+.view-coach .roadmapView { gap: 26px; }
+.view-coach .roadmapView::before { left: 36px; top: 190px; bottom: 70px; width: 10px; background: repeating-linear-gradient(to bottom, #9ac43c 0 26px, #dce9bd 26px 40px); }
+.view-coach .roadmapView article { grid-template-columns: 74px minmax(0,1fr); min-height: 170px; padding: 22px 24px 22px 12px; border: 2px solid #e4ecd7; border-bottom-width: 5px; border-radius: 22px; background: white; box-shadow: 0 10px 30px rgba(18,63,46,.08); }
+.view-coach .roadmapView article:nth-child(even) { margin-left: 70px; background: #f7fbeF; }
+.view-coach .roadmapView article:hover { transform: translateY(-2px); border-color: #bad879; }
+.view-coach .roadmapView article > span { width: 58px; height: 58px; border-width: 6px; font-size: 20px; }
+.view-coach .roadmapView .stepLabel { display: block; margin-bottom: 5px; color: #779530; font-size: 10px; font-weight: 900; letter-spacing: .1em; }
+.view-coach .roadmapView h4 { margin: 0 0 8px; color: var(--forest); font-size: 22px; line-height: 1.2; }
+.view-coach .roadmapView p { margin: 0 0 12px; color: #40544b; font-size: 15px; line-height: 1.5; }
+.view-coach .roadmapView .whyNow { display: block; max-width: 620px; padding: 10px 12px; border-radius: 10px; background: #eef5dd; color: #54655c; font-size: 12px; line-height: 1.45; }
+.view-coach .confidence { margin-top: 10px; padding: 7px 11px; background: #e8f4cc; color: #4e7219; font-size: 10px; font-weight: 850; }
+
+@media (max-width: 620px) {
+  .view-coach .roadmapHero { padding: 20px; }
+  .view-coach .roadmapHero h3 { font-size: 23px; }
+  .view-coach .roadmapView::before { left: 27px; top: 200px; }
+  .view-coach .roadmapView article, .view-coach .roadmapView article:nth-child(even) { grid-template-columns: 56px minmax(0,1fr); margin-left: 0; padding: 18px 16px 18px 8px; }
+  .view-coach .roadmapView article > span { width: 46px; height: 46px; font-size: 16px; }
+  .view-coach .roadmapView h4 { font-size: 18px; }
+  .view-coach .roadmapView p { font-size: 14px; }
+}
