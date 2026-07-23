@@ -829,6 +829,58 @@ footer a { color: var(--forest); font-size: 12px; font-weight: 750; }
   .staffFolder { min-width: 150px; }
 }
 
+/* Modern leadership coach */
+.view-coach .personalizedCoach { max-width: 1120px; padding: 28px; background: #fbfcfa; }
+.view-coach .coachTop { margin-bottom: 18px; }
+.view-coach .coachTop > span { color: #6f7e76; letter-spacing: .08em; }
+.view-coach .compactProfile { padding: 20px 22px; border: 0; border-radius: 18px; background: linear-gradient(135deg, #eff7dc, #f8fbf2); }
+.view-coach .compactProfile h2 { margin: 3px 0 5px; font-size: 32px; }
+.view-coach .contextStrip { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 20px; padding: 0; background: transparent; border: 0; }
+.view-coach .contextStrip > span { flex: 1 1 150px; padding: 12px 14px; border: 1px solid #e1e8df; border-radius: 12px; background: white; }
+.view-coach .contextStrip small { color: #748078; }
+.view-coach .contextStrip strong { color: var(--forest); font-size: 14px; }
+.view-coach .coachShell { display: block; min-height: 560px; overflow: visible; border: 0; border-radius: 18px; background: white; box-shadow: 0 12px 38px rgba(18,63,46,.08); }
+.view-coach .coachTabs { position: sticky; top: 0; z-index: 3; padding: 12px; border: 0; border-bottom: 1px solid #e8ede9; border-radius: 18px 18px 0 0; background: rgba(255,255,255,.96); display: flex; flex-direction: row; gap: 7px; overflow-x: auto; }
+.view-coach .coachTabs button { flex: 0 0 auto; padding: 10px 14px; border-radius: 999px; font-size: 12px; }
+.view-coach .coachTabs button.active { background: var(--forest); box-shadow: 0 3px 0 #87ad35; }
+.view-coach .coachResult { max-width: 820px; padding: 28px 32px 46px; }
+.view-coach .aiResultHeader { margin-bottom: 24px; border-bottom: 0; }
+.view-coach .aiResultHeader > span { width: 44px; height: 44px; border-radius: 14px; }
+.view-coach .aiResultHeader small { color: #6d8d2e; }
+.view-coach .identitySummary { border: 0; border-radius: 14px; padding: 18px; background: #f1f7e4; }
+.view-coach .analysisColumns { gap: 12px; }
+.view-coach .analysisColumns section { border: 0; border-radius: 14px; padding: 16px 18px; background: #f7f9f6; }
+.view-coach .recommendationGrid article, .view-coach .eventIdeas article { border: 0; border-radius: 15px; padding: 18px; background: #fff; box-shadow: 0 7px 24px rgba(18,63,46,.08); }
+.view-coach .roadmapView { position: relative; max-width: 700px; margin: 8px auto; gap: 18px; padding: 8px 0 20px; }
+.view-coach .roadmapView::before { content: ""; position: absolute; left: 30px; top: 32px; bottom: 45px; width: 8px; border-radius: 8px; background: repeating-linear-gradient(to bottom, #9ac43c 0 22px, #dce9bd 22px 34px); }
+.view-coach .roadmapView article { position: relative; grid-template-columns: 64px 1fr; gap: 16px; margin-left: 0; padding: 18px 20px 18px 12px; border: 0; border-radius: 18px; background: #f7faf2; box-shadow: 0 6px 0 #dfe9cc; }
+.view-coach .roadmapView article:nth-child(even) { margin-left: 72px; background: #f0f7df; }
+.view-coach .roadmapView article > span { z-index: 1; width: 48px; height: 48px; border: 5px solid white; background: var(--lime); color: var(--forest); font-size: 16px; font-weight: 900; box-shadow: 0 4px 0 #719727; }
+.view-coach .roadmapView h4 { font-size: 18px; }
+.view-coach .roadmapView p, .view-coach .roadmapView article small { font-size: 13px; }
+.view-coach .roadmapView dl { display: none; }
+.view-coach .confidence { grid-column: 2; justify-self: start; margin-top: 7px; padding: 7px 10px; border-radius: 999px; font-size: 10px; }
+.view-coach .coachSidePanel { position: fixed; right: 24px; bottom: 22px; z-index: 12; width: min(340px, calc(100vw - 32px)); max-height: 520px; overflow-y: auto; display: block; padding: 12px; border: 1px solid #d9e3d5; border-radius: 20px; background: #f6f9f1; box-shadow: 0 20px 55px rgba(10,51,37,.24); }
+.view-coach .coachSidePanel::before { content: "◎  RVplan Coach"; display: block; margin: -12px -12px 12px; padding: 14px 16px; border-radius: 19px 19px 0 0; background: var(--forest); color: white; font-size: 14px; font-weight: 850; }
+.view-coach .coachSidePanel section { border: 0; padding: 14px; }
+.view-coach .coachSidePanel .savedContext { display: none; }
+.view-coach .coachAnswer { border-radius: 12px; padding: 12px; }
+.view-coach .coachAnswer small, .view-coach .eventIdeas article > div:first-child > small, .view-coach .demoNote { display: none; }
+
+@media (max-width: 900px) {
+  .view-coach .coachResult { max-width: none; padding: 24px; }
+  .view-coach .coachSidePanel { right: 16px; bottom: 16px; }
+}
+
+@media (max-width: 620px) {
+  .view-coach .personalizedCoach { padding: 16px; }
+  .view-coach .compactProfile { padding: 16px; }
+  .view-coach .contextStrip > span { flex-basis: 45%; }
+  .view-coach .coachResult { padding: 20px 16px 40px; }
+  .view-coach .roadmapView article:nth-child(even) { margin-left: 22px; }
+  .view-coach .coachSidePanel { right: 10px; bottom: 10px; width: calc(100vw - 20px); max-height: 390px; }
+}
+
 @media print {
   .hero, .progressHeader, .supportRail, .formFooter, footer, .modalBackdrop { display: none !important; }
   .workspace { width: 100%; margin: 0; box-shadow: none; }
